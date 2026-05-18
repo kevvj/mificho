@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
+      const navigate = useNavigate()
+
     return (
         <div className="login">
             <form>
@@ -15,7 +19,7 @@ const Login = () => {
                     <input type="checkbox" checked></input>
                 </div>
 
-                <button>Entrar</button>
+                <button onClick={() => navigate('/home')}>Entrar</button>
 
                 <p className="lostpassw">Olvidé mi contraseña</p>
             </form>

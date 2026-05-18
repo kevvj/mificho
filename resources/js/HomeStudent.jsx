@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 const HomeStudent = () => {
+  const navigate = useNavigate()
   return (
     <div className="home-student">
 
@@ -11,7 +13,7 @@ const HomeStudent = () => {
         <nav className="nav">
           <a className="nav-link" href="#">Inicio</a>
           <a className="nav-link" href="#">Historial</a>
-          <a className="nav-link" href="#">Perfil</a>
+          <a className="nav-link" href="" onClick={() => navigate('/')}>Perfil</a>
         </nav>
 
       </header>
@@ -19,7 +21,7 @@ const HomeStudent = () => {
       <main className="main-content">
 
         <section className="welcome-section">
-          <h1 className="welcome-title">Hola Kevin 👋</h1>
+          <h1 className="welcome-title">Hola Kevin!</h1>
           <p className="welcome-text">
             Tu ficho de hoy está disponible
           </p>
@@ -30,7 +32,7 @@ const HomeStudent = () => {
           <div className="qr-card">
 
             <div className="qr-container">
-              QR
+              <img className="qr-img" src="qrcode.png"></img>
             </div>
 
           </div>
@@ -44,7 +46,7 @@ const HomeStudent = () => {
             <p className="status-text">✅ Disponible</p>
 
             <p className="status-text">
-              Fecha: 17/05/2026
+              Fecha: 18/05/2026
             </p>
 
             <p className="status-text">
@@ -57,7 +59,7 @@ const HomeStudent = () => {
 
         <section className="button-section">
 
-          <button className="buy-button">
+          <button className="buy-button" onClick={() => navigate('/buyticket')}>
             Comprar ficho
           </button>
 

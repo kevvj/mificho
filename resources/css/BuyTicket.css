@@ -1,0 +1,117 @@
+.buy-ticket-page {
+    min-height: 100vh;
+    background: #f5f7fb;
+    font-family: Arial, sans-serif;
+}
+
+.buy-ticket-main {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.buy-ticket-container {
+    width: 100%;
+    max-width: 550px;
+}
+
+.buy-ticket-card {
+    background: white;
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.buy-ticket-title {
+    margin: 0;
+    text-align: center;
+    color: #222;
+    font-size: 32px;
+}
+
+.buy-ticket-subtitle {
+    margin: 0;
+    text-align: center;
+    color: #666;
+}
+
+.ticket-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ticket-info-item {
+    background: #f7f9fc;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-label {
+    color: #555;
+    font-weight: 600;
+}
+
+.ticket-value {
+    color: #222;
+    font-weight: bold;
+}
+
+.available {
+    color: #16a34a;
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.payment-title {
+    margin: 0;
+    color: #222;
+}
+
+.payment-options {
+    display: flex;
+    gap: 15px;
+}
+
+.payment-button {
+    flex: 1;
+    height: 45px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.payment-button:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+.confirm-button {
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.confirm-button:hover {
+    background: #1d4ed8;
+}
