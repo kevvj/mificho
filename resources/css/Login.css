@@ -86,3 +86,8 @@
     color: #54e24a;
     cursor: pointer;
 }
+
+.error{
+    color: red;
+    align-self: center;
+}

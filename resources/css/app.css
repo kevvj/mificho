@@ -3,6 +3,12 @@
 @import './HomeStudent.css';
 @import './BuyTicket.css';
 @import './History.css';
+@import './ForgotPassword.css';
+@import './Nequi.css';
+@import './CreditCard.css';
+@import './PSE.css';
+@import './PurchaseSuccess.css';
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';

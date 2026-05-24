@@ -1,0 +1,106 @@
+.pse-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.pse-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.pse-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pse-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.pse-close:hover {
+    color: #0066cc;
+}
+
+.pse-logo {
+    width: 90px;
+    display: block;
+    margin: 0 auto;
+}
+
+.pse-subtitle {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+}
+
+.pse-label {
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.pse-input {
+    height: 48px;
+    border: 1.5px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    color: #222;
+    appearance: auto;
+}
+
+.pse-input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.pse-error {
+    margin: 0;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pse-button {
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background: #0066cc;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pse-button:hover {
+    background: #0052a3;
+}

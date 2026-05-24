@@ -5,6 +5,7 @@ import Login from './components/Login';
 import HomeStudent from './components/HomeStudent';
 import BuyTicket from './components/BuyTicket';
 import PurchaseHistory from './components/History';
+import ForgotPassword from './components/ForgotPassword';
 
 const root = createRoot(document.getElementById('app'));
 root.render(
@@ -14,8 +15,7 @@ root.render(
             <Route path="/home" element={<HomeStudent />} />
             <Route path="/buyticket" element={<BuyTicket />} />
             <Route path="/history" element={<PurchaseHistory />} />
-
-
+            <Route path="/lostpassword" element={<ForgotPassword />} />
         </Routes>
     </BrowserRouter>
 )

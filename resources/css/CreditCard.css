@@ -1,0 +1,114 @@
+.card-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.card-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 20px;
+    color: #222;
+    font-weight: 700;
+}
+
+.card-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.card-close:hover {
+    color: #2563eb;
+}
+
+.card-subtitle {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.card-label {
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.card-input {
+    height: 48px;
+    border: 1.5px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.card-row {
+    display: flex;
+    gap: 15px;
+}
+
+.card-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card-error {
+    margin: 0;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.card-button {
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card-button:hover {
+    background: #1d4ed8;
+}

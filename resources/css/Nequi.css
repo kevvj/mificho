@@ -1,0 +1,106 @@
+.nequi-trigger {
+    flex: 1;
+    height: 45px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    color: #7B2FBE;
+    transition: 0.2s;
+}
+
+.nequi-trigger:hover {
+    border-color: #7B2FBE;
+    background: #f9f4ff;
+}
+
+.nequi-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.nequi-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 8px 40px rgba(123, 47, 190, 0.15);
+    margin: 20px;
+}
+
+.nequi-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nequi-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.nequi-close:hover {
+    color: #7B2FBE;
+}
+
+.nequi-logo {
+    width: 90px;
+    display: block;
+    margin: 0 auto;
+}
+
+.nequi-subtitle {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.nequi-input {
+    height: 48px;
+    border: 1.5px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.2s;
+    letter-spacing: 1px;
+}
+
+.nequi-input:focus {
+    border-color: #7B2FBE;
+    box-shadow: 0 0 0 3px rgba(123, 47, 190, 0.1);
+}
+
+.nequi-button {
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background: #7B2FBE;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nequi-button:hover {
+    background: #6520a8;
+}
