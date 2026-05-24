@@ -1,0 +1,103 @@
+.history-page {
+    min-height: 100vh;
+    background: #f5f7fb;
+    font-family: Arial, sans-serif;
+}
+
+.history-main {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.history-container {
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.history-title {
+    margin: 0;
+    text-align: center;
+    color: #222;
+    font-size: 32px;
+}
+
+.history-empty {
+    text-align: center;
+    color: #666;
+    margin: 0;
+}
+
+.history-card {
+    background: white;
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-date {
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.history-total {
+    color: #222;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.history-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.history-detail-item {
+    background: #f7f9fc;
+    padding: 15px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+    align-items: center;
+}
+
+.history-detail-label {
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.history-detail-value {
+    color: #222;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: right;
+}
+
+.history-status {
+    font-weight: bold;
+    font-size: 14px;
+    text-align: right;
+}
+
+.history-status--disponible {
+    color: #16a34a;
+}
+
+.history-status--usado {
+    color: #9ca3af;
+}

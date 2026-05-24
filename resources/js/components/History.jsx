@@ -1,68 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
-const PurchaseHistory = () => {
-    const navigate = useNavigate();
-
-    return (
-        <div className="buy-ticket-page">
-
-                  <Header></Header>
-
-
-            <main className="buy-ticket-main">
-                <section className="buy-ticket-container">
-
-                    <h1 className="buy-ticket-title">Historial de compras</h1>
-
-                    {mockHistorial.length === 0 ? (
-                        <p className="buy-ticket-subtitle">No tienes compras registradas.</p>
-                    ) : (
-                        mockHistorial.map((compra) => (
-                            <div key={compra.id_compra} className="buy-ticket-card" style={{ marginBottom: '1rem' }}>
-
-                                <div className="ticket-info">
-
-                                    <div className="ticket-info-item">
-                                        <span className="ticket-label">Fecha</span>
-                                        <span className="ticket-value">{compra.fecha}</span>
-                                    </div>
-
-                                    <div className="ticket-info-item">
-                                        <span className="ticket-label">Total</span>
-                                        <span className="ticket-value">${compra.total.toLocaleString('es-CO')}</span>
-                                    </div>
-
-                                    {compra.detalles.map((detalle) => (
-                                        <div key={detalle.id_detalle}>
-                                            <div className="ticket-info-item">
-                                                <span className="ticket-label">Cantidad de fichos</span>
-                                                <span className="ticket-value">{detalle.cantidad}</span>
-                                            </div>
-                                            <div className="ticket-info-item">
-                                                <span className="ticket-label">Precio por ficho</span>
-                                                <span className="ticket-value">${detalle.ficho.precio.toLocaleString('es-CO')}</span>
-                                            </div>
-                                            <div className="ticket-info-item">
-                                                <span className="ticket-label">Estado</span>
-                                                <span className={`ticket-value ${detalle.ficho.estado === 'usado' ? '' : 'available'}`}>
-                                                    {detalle.ficho.estado}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ))}
-
-                                </div>
-
-                            </div>
-                        ))
-                    )}
-
-                </section>
-            </main>
-
-        </div>
-    );
-};
 
 const mockHistorial = [
     {
@@ -90,5 +27,57 @@ const mockHistorial = [
         ],
     },
 ];
+
+const PurchaseHistory = () => {
+    const navigate = useNavigate();
+
+    return (
+        <div className="history-page">
+
+            <Header />
+
+            <main className="history-main">
+                <section className="history-container">
+
+                    <h1 className="history-title">Historial de compras</h1>
+
+                    {mockHistorial.length === 0 ? (
+                        <p className="history-empty">No tienes compras registradas.</p>
+                    ) : (
+                        mockHistorial.map((compra) => (
+                            <div key={compra.id_compra} className="history-card">
+
+                                <div className="history-card-header">
+                                    <span className="history-date">{compra.fecha}</span>
+                                    <span className="history-total">${compra.total.toLocaleString('es-CO')}</span>
+                                </div>
+
+                                <div className="history-details">
+                                    {compra.detalles.map((detalle) => (
+                                        <div key={detalle.id_detalle} className="history-detail-item">
+                                            <span className="history-detail-label">Cantidad</span>
+                                            <span className="history-detail-value">{detalle.cantidad}</span>
+
+                                            <span className="history-detail-label">Precio por ficho</span>
+                                            <span className="history-detail-value">${detalle.ficho.precio.toLocaleString('es-CO')}</span>
+
+                                            <span className="history-detail-label">Estado</span>
+                                            <span className={`history-status ${detalle.ficho.estado === 'usado' ? 'history-status--usado' : 'history-status--disponible'}`}>
+                                                {detalle.ficho.estado}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                            </div>
+                        ))
+                    )}
+
+                </section>
+            </main>
+
+        </div>
+    );
+};
 
 export default PurchaseHistory;
