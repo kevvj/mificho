@@ -1,10 +1,10 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './Header';
-import Login from './Login';
-import HomeStudent from './HomeStudent';
-import BuyTicket from './BuyTicket';
-import PurchaseHistory from './History';
+import Header from './components/Header';
+import Login from './components/Login';
+import HomeStudent from './components/HomeStudent';
+import BuyTicket from './components/BuyTicket';
+import PurchaseHistory from './components/History';
 
 const root = createRoot(document.getElementById('app'));
 root.render(
