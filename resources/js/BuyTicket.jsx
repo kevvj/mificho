@@ -1,22 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 const BuyTicket = () => {
   const navigate = useNavigate()
   return (
     <div className="buy-ticket-page">
 
-      <header className="header">
+      <Header></Header>
 
-        <div className="logo-container">
-          <h2 className="logo">MiFicho</h2>
-        </div>
-
-        <nav className="nav">
-          <a className="nav-link" href="#">Inicio</a>
-          <a className="nav-link" href="#">Historial</a>
-          <a className="nav-link" href="#" onClick={() => navigate('/')}>Perfil</a>
-        </nav>
-
-      </header>
 
       <main className="buy-ticket-main">
 
