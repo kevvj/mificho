@@ -79,7 +79,7 @@ const Login = () => {
                 </div>
 
                 <div className="keep-logged">
-                    Mantener sección iniciada
+                    Mantener sesión iniciada
                     <input type="checkbox" checked={check} onChange={(e) => setCheck(e.target.checked)}></input>
                 </div>
 
