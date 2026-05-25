@@ -8,6 +8,7 @@ class Usuario extends Model
 {
     protected $table = 'usuario';
     public $timestamps = false;
+    protected $primaryKey = 'id_usuario';
     protected $fillable = ['nombre', 'correo', 'tipo_usuario', 'contrasena'];
     protected $hidden = ['contrasena'];
 }
