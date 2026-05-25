@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
-import Nequi from './Nequi';
+import Header from '../components/Header';
+import Nequi from '../components/Nequi';
 import { useState } from 'react';
-import CreditCard from './CreditCard';
-import PSE from './PSE';
-import PurchaseSuccess from './PurchaseSuccess';
+import CreditCard from '../components/CreditCard';
+import PSE from '../components/PSE';
+import PurchaseSuccess from '../components/PurchaseSuccess';
 const BuyTicket = () => {
   const [openNequi, setOpenNequi] = useState(false);
   const [openCredicCard, setOpenCreditCard] = useState(false);
