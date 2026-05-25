@@ -198,7 +198,7 @@ const Login = () => {
                     navigate('/lostpassword')
                 }}>Olvidé mi contraseña</p>
             </form>
-            esto es para meter datos(si lo vas a usar mira bien que datos metes)
+            esto es para solo para hacer pruebas(si lo vas a usar mira bien que datos metes y trata de reiniciar cada que muevas algo y... Es mas no lo muevas jajaj)
             <div className='inputs-form'>
                 <h2>estudiantes</h2>
                 <input type="text"
