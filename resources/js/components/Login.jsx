@@ -9,6 +9,12 @@ const Login = () => {
     const [check, setCheck] = useState(false)
     const [error, setError] = useState("")
 
+
+    const [dato1, setDato1] = useState("")
+    const [dato2, setDato2] = useState("@universidad.edu.co")
+    const [dato3, setDato3] = useState("estudiante")
+    const [dato4, setDato4] = useState("1234")
+
     const logIn = async () => {
 
         if (email === "" && passw === "") {
@@ -56,6 +62,37 @@ const Login = () => {
         }
     }
 
+    const handleBD = async () => {
+        if (dato1 === "") {
+            setError('Rellena los campos')
+            return;
+        }
+
+        if (dato2 === "") {
+            setError('Rellena los campos')
+            return;
+        }
+
+        if (dato3 === "") {
+            setError('Rellena los campos')
+            return;
+        }
+
+        if (dato4 === "") {
+            setError('Rellena los campos')
+            return;
+        }
+        setError('')
+        const response = await fetch('https://mificho.onrender.com/api/insertUser', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email:dato2, password: dato4, name: dato1, type: dato3 })
+        })
+
+        const data = await response.json();
+        console.log(data);
+    }
+
     return (
         <div className="login">
             <form onSubmit={(e) => e.preventDefault()}>
@@ -91,6 +128,28 @@ const Login = () => {
                     navigate('/lostpassword')
                 }}>Olvidé mi contraseña</p>
             </form>
+
+            <div className='inputs-form'>
+                <input type="text"
+                    placeholder="nombre"
+                    value={dato1}
+                    onChange={(e) => setDato1(e.target.value)}
+                />
+                <input type="text"
+                    placeholder="correo"
+                    value={dato2}
+                    onChange={(e) => setDato2(e.target.value)} />
+                <input type="text"
+                    placeholder="tipo_usuario"
+                    value={dato3}
+                    onChange={(e) => setDato3(e.target.value)} />
+                <input type="text"
+                    placeholder="contraseña"
+                    value={dato4}
+                    onChange={(e) => setDato4(e.target.value)} />
+
+                <button onClick={() => handleBD()}>enviar</button>
+            </div>
         </div>
     )
 }
