@@ -7,7 +7,7 @@ import BuyTicket from './pages/BuyTicket';
 import PurchaseHistory from './pages/History';
 import ForgotPassword from './pages/ForgotPassword';
 
-export const API_URL = 'http://localhost:8000/api';
+export const API_URL = 'http://localhost:8000';
 
 const root = createRoot(document.getElementById('app'));
 root.render(

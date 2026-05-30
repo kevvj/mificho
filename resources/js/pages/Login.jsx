@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react'
+import { API_URL } from '../app';
 
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
     const [dato7, setDato7] = useState("")
     const [dato8, setDato8] = useState("")
 
-    const URL = import.meta.env.VITE_API_URL
+    const URL = API_URL
 
     useEffect(() => {
         fetch(`${URL}/api/users`)

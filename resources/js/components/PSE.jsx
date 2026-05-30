@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_URL } from '../app';
 
 const PSE = ({ onSuccess, open, setOpen, amount }) => {
     const [bank, setBank] = useState('');
@@ -7,7 +8,7 @@ const PSE = ({ onSuccess, open, setOpen, amount }) => {
     const [personType, setPersonType] = useState('');
     const [error, setError] = useState('');
 
-    const URL = import.meta.env.VITE_API_URL
+    const URL = API_URL
 
     const today = new Date().toISOString().split('T')[0];
 

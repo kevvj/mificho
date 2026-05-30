@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_URL } from '../app';
 
 const CreditCard = ({ onSuccess, open, setOpen, amount }) => {
     const [cardNumber, setCardNumber] = useState('');
@@ -7,7 +8,7 @@ const CreditCard = ({ onSuccess, open, setOpen, amount }) => {
     const [cvv, setCvv] = useState('');
     const [error, setError] = useState('');
 
-    const URL = import.meta.env.VITE_API_URL
+    const URL = API_URL
 
     const today = new Date().toISOString().split('T')[0];
 

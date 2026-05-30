@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_URL } from '../app';
 
 const Nequi = ({ onSuccess, open, setOpen, amount }) => {
     const [phone, setPhone] = useState('');
@@ -7,7 +8,8 @@ const Nequi = ({ onSuccess, open, setOpen, amount }) => {
     const [notRobot, setNotRobot] = useState(false);
     const [error, setError] = useState("")
 
-    const URL = import.meta.env.VITE_API_URL
+    const URL = API_URL
+
 
     const today = new Date().toISOString().split('T')[0];
 
