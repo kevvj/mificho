@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { API_URL } from '../app';
+import { API_URL } from '../config';
+
 
 const PSE = ({ onSuccess, open, setOpen, amount }) => {
     const [bank, setBank] = useState('');

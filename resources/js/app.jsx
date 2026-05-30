@@ -7,7 +7,6 @@ import BuyTicket from './pages/BuyTicket';
 import PurchaseHistory from './pages/History';
 import ForgotPassword from './pages/ForgotPassword';
 
-export const API_URL = 'https://mificho.onrender.com';
 
 const root = createRoot(document.getElementById('app'));
 root.render(

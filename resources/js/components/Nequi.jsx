@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { API_URL } from '../app';
+import { API_URL } from '../config';
 
 const Nequi = ({ onSuccess, open, setOpen, amount }) => {
     const [phone, setPhone] = useState('');
