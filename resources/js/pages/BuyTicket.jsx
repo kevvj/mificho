@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Nequi from '../components/Nequi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CreditCard from '../components/CreditCard';
 import PSE from '../components/PSE';
 import PurchaseSuccess from '../components/PurchaseSuccess';
 import ErrorAlert from '../components/Error';
+import { API_URL } from '../config';
 const BuyTicket = () => {
   const [openNequi, setOpenNequi] = useState(false);
   const [openCredicCard, setOpenCreditCard] = useState(false);
@@ -20,6 +21,19 @@ const BuyTicket = () => {
   const navigate = useNavigate()
 
   const today = new Date().toISOString().split('T')[0];
+
+  const [coffeeShops, setCoffeeShops] = useState([]);
+  const [selectedCoffeeShop, setSelectedCoffeeShop] = useState("");
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/coffeestores`)
+      .then(res => res.json())
+      .then(data => {
+        setCoffeeShops(data);
+        setSelectedCoffeeShop(data[0]?.id_cafeteria);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   const handleButton = () => {
     if (selectedMethod === 0) {
@@ -99,6 +113,21 @@ const BuyTicket = () => {
 
             </div>
 
+            <div className="ticket-info-item">
+              <span className="ticket-label">Coffee Shop</span>
+              <select
+                className="cafeteria-select"
+                value={selectedCoffeeShop}
+                onChange={(e) => setSelectedCoffeeShop(Number(e.target.value))}
+              >
+                {coffeeShops.map(c => (
+                  <option key={c.id_cafeteria} value={c.id_cafeteria}>
+                    {c.nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="payment-methods">
 
               <h3 className="payment-title">
@@ -137,9 +166,9 @@ const BuyTicket = () => {
       </main>
 
 
-      <Nequi open={openNequi} setOpen={setOpenNequi} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError}></Nequi>
-      <CreditCard open={openCredicCard} setOpen={setOpenCreditCard} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError}></CreditCard>
-      <PSE open={openPSE} setOpen={setOpenPSE} onSuccess={onSuccess} amount={amount} setError={setError} error={error} setShowError={setShowError}></PSE>
+      <Nequi open={openNequi} setOpen={setOpenNequi} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError} coffeeShopId ={selectedCoffeeShop}></Nequi>
+      <CreditCard open={openCredicCard} setOpen={setOpenCreditCard} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError} coffeeShopId ={selectedCoffeeShop}></CreditCard>
+      <PSE open={openPSE} setOpen={setOpenPSE} onSuccess={onSuccess} amount={amount} setError={setError} error={error} setShowError={setShowError} coffeeShopId ={selectedCoffeeShop}></PSE>
       {purchaseSuccess && <PurchaseSuccess onContinue={onContinue}></PurchaseSuccess>}
       <ErrorAlert open={showError} setOpen={setShowError} message={error} onContinue={() => setShowError(false)}></ErrorAlert>
     </div>

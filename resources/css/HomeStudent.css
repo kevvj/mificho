@@ -1,50 +1,6 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f7fb;
-}
-
 .home-student {
     min-height: 100vh;
-}
-
-.header {
-    height: 70px;
-    background: #3ea737;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 300px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    font-weight: 900;
-    font-size: large;
-
-}
-
-.logo {
-    color: white;
-    margin: 0;
-}
-
-.logo-container {
-    cursor: pointer;
-}
-
-.nav {
-    display: flex;
-    gap: 25px;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 600;
-    transition: 0.2s;
-
-}
-
-.nav-link:hover {
-    color: #54e24a;
+    background: #f4f6f4;
 }
 
 .main-content {
@@ -61,19 +17,27 @@ body {
 .button-section,
 .history-section {
     background: white;
-    border-radius: 14px;
-    padding: 25px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.welcome-section {
+    background: #2d7a3a;
+    color: white;
 }
 
 .welcome-title {
     margin: 0;
-    color: #222;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
 }
 
 .welcome-text {
-    margin-top: 10px;
-    color: #666;
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
 }
 
 .ticket-section {
@@ -92,25 +56,28 @@ body {
 .qr-container {
     width: 180px;
     height: 180px;
-    border-radius: 12px;
-    border: 2px dashed #555555;
+    border-radius: 14px;
+    border: 2px dashed #a8d5b0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 32px;
     font-weight: bold;
-    color: #565656;
-    background: #eef4ff;
+    color: #2d7a3a;
+    background: #f0f9f2;
 }
 
 .status-title {
     margin-top: 0;
     color: #222;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
 .status-text {
     color: #555;
     margin: 10px 0;
+    font-size: 0.95rem;
 }
 
 .button-section {
@@ -120,36 +87,141 @@ body {
 
 .buy-button {
     width: 220px;
-    height: 48px;
+    height: 50px;
     border: none;
-    border-radius: 10px;
-    background: #54e24a;
+    border-radius: 12px;
+    background: #2d7a3a;
     color: white;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
+    box-shadow: 0 4px 15px rgba(45, 122, 58, 0.3);
 }
 
 .buy-button:hover {
-    background: #54e24a;
+    background: #246030;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(45, 122, 58, 0.4);
 }
 
 .history-title {
     margin-top: 0;
     color: #222;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 28px;
+}
+
+.history-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px;
+    gap: 20px;
 }
 
 .history-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .history-item {
-    margin: 0;
-    color: #555;
-    background: #f7f9fc;
-    padding: 12px;
-    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f9f5;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: #444;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s;
+}
+
+.history-item:hover {
+    transform: translateX(4px);
+}
+
+.status-available {
+    color: #2d7a3a;
+    font-weight: 700;
+}
+
+.status-used {
+    color: #e53e3e;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin: 20px auto;
+        gap: 15px;
+        padding: 0 12px;
+    }
+
+    .welcome-section,
+    .ticket-section,
+    .button-section,
+    .history-section {
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    .welcome-title {
+        font-size: 1.4rem;
+    }
+
+    .welcome-text {
+        font-size: 0.9rem;
+    }
+
+    .ticket-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .qr-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    .status-title {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .status-text {
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    .buy-button {
+        width: 100%;
+    }
+
+    .history-title {
+        font-size: 1rem;
+        padding: 0;
+    }
+
+    .history-item {
+        font-size: 0.8rem;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-title {
+        font-size: 1.2rem;
+    }
+
+    .qr-container {
+        width: 130px;
+        height: 130px;
+    }
 }

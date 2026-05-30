@@ -92,3 +92,59 @@
     color: red;
     align-self: center;
 }
+
+@media (max-width: 768px) {
+    .login form {
+        width: 90%;
+        padding: 25px;
+    }
+
+    .login h2 {
+        font-size: 20px;
+    }
+
+    .logo-unicor {
+        width: 100px;
+    }
+
+    .inputs-form input {
+        height: 42px;
+        font-size: 14px;
+    }
+
+    .login button {
+        height: 42px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login {
+        justify-content: flex-start;
+        padding: 0;
+    }
+
+    .login form {
+        width: 100%;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 40px 24px;
+        gap: 15px;
+    }
+
+    .login h2 {
+        font-size: 18px;
+    }
+
+    .logo-unicor {
+        width: 80px;
+    }
+
+    .keep-logged {
+        font-size: 13px;
+    }
+
+    .lostpassw {
+        font-size: 13px;
+    }
+}

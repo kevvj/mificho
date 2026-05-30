@@ -9,12 +9,20 @@
 @import './PSE.css';
 @import './PurchaseSuccess.css';
 @import './ErrorAlert.css';
+@import './Header.css';
 
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+
+
+
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
 
 .tabla-grid {
     display: grid;
@@ -27,7 +35,7 @@
     padding: 10px;
 }
 
-.tabla-grid-coff div{
+.tabla-grid-coff div {
     border: 1px solid #000000;
     padding: 10px;
 }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { API_URL } from '../config';
 
 
-const CreditCard = ({ onSuccess, open, setOpen, amount, error, setError, setShowError }) => {
+const CreditCard = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId }) => {
     const [cardNumber, setCardNumber] = useState('');
     const [cardName, setCardName] = useState('');
     const [expiry, setExpiry] = useState('');
@@ -36,8 +36,8 @@ const CreditCard = ({ onSuccess, open, setOpen, amount, error, setError, setShow
         const response = await fetch(`${URL}/api/insertPay`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount, date: today, user_id })
-        })
+            body: JSON.stringify({ amount, date: today, user_id, coffeeShopId })
+        });
         const data = await response.json();
 
         if (response.status === 400) {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { API_URL } from '../config';
 
-const Nequi = ({ onSuccess, open, setOpen, amount, error, setError, setShowError }) => {
+const Nequi = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId  }) => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [dynamicKey, setDynamicKey] = useState('');
@@ -41,7 +41,7 @@ const Nequi = ({ onSuccess, open, setOpen, amount, error, setError, setShowError
         const response = await fetch(`${URL}/api/insertPay`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount, date: today, user_id })
+            body: JSON.stringify({ amount, date: today, user_id, coffeeShopId })
         });
 
         const data = await response.json();

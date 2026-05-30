@@ -9,7 +9,7 @@ class HistoryController extends Controller
 {
     public function index(Request $request)
 {
-    $history = Compra::with(['detalleCompra.ficho'])
+    $history = Compra::with(['detalleCompra.ficho', 'cafeteria'])
         ->where('id_usuario', (int) $request->user_id)
         ->get();
 

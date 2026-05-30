@@ -16,4 +16,5 @@ class DetalleCompra extends Model
     {
         return $this->belongsTo(Ficho::class, 'id_ficho');
     }
+    
 }

@@ -22,6 +22,7 @@ class PurchaseController extends Controller
                 'total' => $request->amount,
                 'fecha' => $request->date,
                 'id_usuario' => $request->user_id,
+                'id_cafeteria' => $request->coffeeShopId,
             ]);
 
             return response()->json(['message' => 'Compra creada exitosamente'], 201);
