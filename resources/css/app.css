@@ -8,6 +8,7 @@
 @import './CreditCard.css';
 @import './PSE.css';
 @import './PurchaseSuccess.css';
+@import './ErrorAlert.css';
 
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

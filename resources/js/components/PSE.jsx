@@ -2,16 +2,15 @@ import { useState } from 'react';
 import { API_URL } from '../config';
 
 
-const PSE = ({ onSuccess, open, setOpen, amount }) => {
+const PSE = ({ onSuccess, open, setOpen, amount, error, setError, setShowError }) => {
     const [bank, setBank] = useState('');
     const [documentType, setDocumentType] = useState('');
     const [documentNumber, setDocumentNumber] = useState('');
     const [personType, setPersonType] = useState('');
-    const [error, setError] = useState('');
 
     const URL = API_URL
 
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toLocaleString('sv-SE');
 
     const handlePay = async () => {
         if (!bank) {
@@ -39,8 +38,14 @@ const PSE = ({ onSuccess, open, setOpen, amount }) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount, date: today, user_id })
         })
-        const text = await response.text()
-        console.log(text)
+        const data = await response.json();
+
+        if (response.status === 400) {
+            setError(data.error);
+            setShowError(true)
+            setOpen(false);
+            return;
+        }
 
         setOpen(false);
         onSuccess();

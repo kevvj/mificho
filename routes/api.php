@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CoffeStoreController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\HistoryController;
+
 
 
 Route::get('/user', function (Request $request) {
@@ -27,6 +29,8 @@ Route::post('/insertCoff', [CoffeStoreController::class, 'store']);
 Route::delete('/deleteCoff', [CoffeStoreController::class, 'destroy']);
 
 Route::post('/insertPay', [PurchaseController::class, 'store']);
+
+Route::post('/history', [HistoryController::class, 'index']);
 
 
 

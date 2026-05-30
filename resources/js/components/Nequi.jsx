@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { API_URL } from '../config';
 
-const Nequi = ({ onSuccess, open, setOpen, amount }) => {
+const Nequi = ({ onSuccess, open, setOpen, amount, error, setError, setShowError }) => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [dynamicKey, setDynamicKey] = useState('');
     const [notRobot, setNotRobot] = useState(false);
-    const [error, setError] = useState("")
 
     const URL = API_URL
 
 
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toLocaleString('sv-SE');
 
     const handlePay = async () => {
         if (phone.length < 10) {
@@ -43,15 +42,19 @@ const Nequi = ({ onSuccess, open, setOpen, amount }) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount, date: today, user_id })
-        })
-        const text = await response.text()
-        console.log(text)
+        });
+
+        const data = await response.json();
+
+        if (response.status === 400) {
+            setError(data.error);
+            setShowError(true)
+            setOpen(false);
+            return;
+        }
 
         setOpen(false);
-
-
-
-         onSuccess();
+        onSuccess();
     };
 
     return (

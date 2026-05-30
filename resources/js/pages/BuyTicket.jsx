@@ -5,12 +5,15 @@ import { useState } from 'react';
 import CreditCard from '../components/CreditCard';
 import PSE from '../components/PSE';
 import PurchaseSuccess from '../components/PurchaseSuccess';
+import ErrorAlert from '../components/Error';
 const BuyTicket = () => {
   const [openNequi, setOpenNequi] = useState(false);
   const [openCredicCard, setOpenCreditCard] = useState(false);
   const [openPSE, setOpenPSE] = useState(false)
   const [selectedMethod, setSelectedMethod] = useState(1)
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  const [showError, setShowError] = useState(false)
+  const [error, setError] = useState("")
 
   const [amount, setAmount] = useState(1000)
 
@@ -134,10 +137,11 @@ const BuyTicket = () => {
       </main>
 
 
-      <Nequi open={openNequi} setOpen={setOpenNequi} onSuccess={onSuccess} amount={amount}></Nequi>
-      <CreditCard open={openCredicCard} setOpen={setOpenCreditCard} onSuccess={onSuccess} amount={amount}></CreditCard>
-      <PSE open={openPSE} setOpen={setOpenPSE} onSuccess={onSuccess} amount={amount}></PSE>
+      <Nequi open={openNequi} setOpen={setOpenNequi} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError}></Nequi>
+      <CreditCard open={openCredicCard} setOpen={setOpenCreditCard} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError}></CreditCard>
+      <PSE open={openPSE} setOpen={setOpenPSE} onSuccess={onSuccess} amount={amount} setError={setError} error={error} setShowError={setShowError}></PSE>
       {purchaseSuccess && <PurchaseSuccess onContinue={onContinue}></PurchaseSuccess>}
+      <ErrorAlert open={showError} setOpen={setShowError} message={error} onContinue={() => setShowError(false)}></ErrorAlert>
     </div>
   )
 }

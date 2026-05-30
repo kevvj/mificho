@@ -10,6 +10,14 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
         try {
+            $yaCompro = Compra::where('id_usuario', $request->user_id)
+                ->whereDate('fecha', now()->toDateString())
+                ->exists();
+
+            if ($yaCompro) {
+                return response()->json(['error' => 'Ya compraste un ficho hoy'], 400);
+            }
+
             Compra::create([
                 'total' => $request->amount,
                 'fecha' => $request->date,
@@ -17,18 +25,6 @@ class PurchaseController extends Controller
             ]);
 
             return response()->json(['message' => 'Compra creada exitosamente'], 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
-
-    //todavia no ojo ahi ignora todo esto de abajo
-
-    public function destroy(Request $request)
-    {
-        try {
-            Compra::where('id_usuario', $request->id)->delete();
-            return response()->json(['message' => 'Eliminado'], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
