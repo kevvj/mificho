@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import Header from './Header';
 import { useEffect, useState } from 'react';
 import { API_URL } from '../config';
 
@@ -9,6 +9,11 @@ const HomeStudent = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!user) {
+      navigate('/')
+      return
+    }
 
     fetch(`${API_URL}/api/history`, {
       method: 'POST',

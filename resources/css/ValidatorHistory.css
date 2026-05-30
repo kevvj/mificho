@@ -1,0 +1,127 @@
+.validator-history-page {
+    min-height: 100vh;
+    background: #f4f6f4;
+}
+
+.validator-history-main {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 20px;
+}
+
+.validator-history-welcome {
+    background: #2d7a3a;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.validator-history-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+.validator-history-subtitle {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+}
+
+.validator-history-container {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.validator-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f4f9f5;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s;
+}
+
+.validator-history-item:hover {
+    transform: translateX(4px);
+}
+
+.validator-history-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.validator-history-student {
+    font-weight: 600;
+    color: #222;
+    font-size: 1rem;
+}
+
+.validator-history-cafeteria {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.validator-history-date {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.validator-history-status {
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+.status-valid {
+    background: #f0f9f2;
+    color: #2d7a3a;
+}
+
+.status-invalid {
+    background: #fee2e2;
+    color: #e53e3e;
+}
+
+.validator-history-empty {
+    text-align: center;
+    color: #888;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .validator-history-main {
+        margin: 20px auto;
+        gap: 15px;
+        padding: 0 12px;
+    }
+
+    .validator-history-title {
+        font-size: 1.4rem;
+    }
+
+    .validator-history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .validator-history-title {
+        font-size: 1.2rem;
+    }
+}

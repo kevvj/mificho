@@ -13,7 +13,7 @@ const Header = () => {
             <nav className="nav">
                 <a className="nav-link" href="home">Inicio</a>
                 <a className="nav-link" href="history" >Historial</a>
-                <a className="nav-link" href="" onClick={() => navigate('/')}>Perfil</a>
+                <a className="nav-link" onClick={() => navigate('/profile')}>Perfil</a>
             </nav>
 
         </header>

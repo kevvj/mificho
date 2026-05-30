@@ -10,6 +10,11 @@
 @import './PurchaseSuccess.css';
 @import './ErrorAlert.css';
 @import './Header.css';
+@import './HomeValidator.css';
+@import './Profile.css';
+@import './ValidatorHistory.css';
+
+
 
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
