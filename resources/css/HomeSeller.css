@@ -1,0 +1,199 @@
+.home-seller {
+    min-height: 100vh;
+    background: #f4f6f4;
+}
+
+.seller-main {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 20px;
+}
+
+.seller-welcome {
+    background: #2d7a3a;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.seller-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+.seller-subtitle {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+}
+
+.seller-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.seller-sell {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.seller-sell-title {
+    margin: 0 0 8px 0;
+    color: #222;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.seller-sell-subtitle {
+    margin: 0 0 20px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.seller-sell-form {
+    display: flex;
+    gap: 12px;
+}
+
+.seller-input {
+    flex: 1;
+    height: 46px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.seller-input:focus {
+    border-color: #2d7a3a;
+}
+
+.seller-button {
+    height: 46px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 10px;
+    background: #2d7a3a;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 15px rgba(45, 122, 58, 0.3);
+    white-space: nowrap;
+}
+
+.seller-button:hover {
+    background: #246030;
+    transform: translateY(-2px);
+}
+
+.seller-recent {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.seller-recent-title {
+    margin: 0 0 20px 0;
+    color: #222;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.seller-recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.seller-sale-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f4f9f5;
+    padding: 14px 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s;
+}
+
+.seller-sale-item:hover {
+    transform: translateX(4px);
+}
+
+.seller-sale-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.seller-sale-student {
+    font-weight: 600;
+    color: #222;
+    font-size: 0.95rem;
+}
+
+.seller-sale-cafeteria {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.seller-sale-time {
+    color: #999;
+    font-size: 0.85rem;
+    margin: 0 16px;
+}
+
+.seller-sale-amount {
+    font-weight: 700;
+    color: #2d7a3a;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .seller-main {
+        margin: 20px auto;
+        gap: 15px;
+        padding: 0 12px;
+    }
+
+    .seller-title {
+        font-size: 1.4rem;
+    }
+
+    .seller-stats {
+        flex-direction: column;
+    }
+
+    .seller-sell-form {
+        flex-direction: column;
+    }
+
+    .seller-button {
+        width: 100%;
+    }
+
+    .seller-sale-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .seller-title {
+        font-size: 1.2rem;
+    }
+}

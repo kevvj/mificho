@@ -120,3 +120,71 @@
     color: #2563eb;
     border-color: #2563eb;
 }
+
+@media (max-width: 768px) {
+    .buy-ticket-main {
+        padding: 30px 15px;
+    }
+
+    .buy-ticket-card {
+        padding: 24px;
+        gap: 20px;
+    }
+
+    .buy-ticket-title {
+        font-size: 24px;
+    }
+
+    .ticket-info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .payment-options {
+        flex-direction: column;
+    }
+
+    .payment-button {
+        height: 42px;
+    }
+
+    .confirm-button {
+        height: 46px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .buy-ticket-main {
+        padding: 0;
+    }
+
+    .buy-ticket-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .buy-ticket-card {
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 30px 20px;
+        gap: 15px;
+    }
+
+    .buy-ticket-title {
+        font-size: 20px;
+    }
+
+    .buy-ticket-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .ticket-label {
+        font-size: 0.85rem;
+    }
+
+    .ticket-value {
+        font-size: 0.85rem;
+    }
+}
