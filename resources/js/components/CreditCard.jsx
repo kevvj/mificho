@@ -1,13 +1,17 @@
 import { useState } from 'react';
 
-const CreditCard = ({ onSuccess, open, setOpen }) => {
+const CreditCard = ({ onSuccess, open, setOpen, amount }) => {
     const [cardNumber, setCardNumber] = useState('');
     const [cardName, setCardName] = useState('');
     const [expiry, setExpiry] = useState('');
     const [cvv, setCvv] = useState('');
     const [error, setError] = useState('');
 
-    const handlePay = () => {
+    const URL = import.meta.env.VITE_API_URL
+
+    const today = new Date().toISOString().split('T')[0];
+
+    const handlePay = async () => {
         if (cardNumber.length < 19) {
             setError('Ingresa un número de tarjeta válido');
             return;
@@ -24,6 +28,18 @@ const CreditCard = ({ onSuccess, open, setOpen }) => {
             setError('Ingresa el CVV');
             return;
         }
+
+        const user = JSON.parse(localStorage.getItem('user'));
+        const user_id = user.id_usuario;
+
+        const response = await fetch(`${URL}/api/insertPay`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount, date: today, user_id })
+        })
+        const text = await response.text()
+        console.log(text)
+
         setOpen(false);
         onSuccess();
     };

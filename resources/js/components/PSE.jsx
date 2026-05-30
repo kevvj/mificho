@@ -1,13 +1,17 @@
 import { useState } from 'react';
 
-const PSE = ({ onSuccess, open, setOpen }) => {
+const PSE = ({ onSuccess, open, setOpen, amount }) => {
     const [bank, setBank] = useState('');
     const [documentType, setDocumentType] = useState('');
     const [documentNumber, setDocumentNumber] = useState('');
     const [personType, setPersonType] = useState('');
     const [error, setError] = useState('');
 
-    const handlePay = () => {
+    const URL = import.meta.env.VITE_API_URL
+
+    const today = new Date().toISOString().split('T')[0];
+
+    const handlePay = async () => {
         if (!bank) {
             setError('Selecciona un banco');
             return;
@@ -24,6 +28,18 @@ const PSE = ({ onSuccess, open, setOpen }) => {
             setError('Selecciona el tipo de persona');
             return;
         }
+
+        const user = JSON.parse(localStorage.getItem('user'));
+        const user_id = user.id_usuario;
+
+        const response = await fetch(`${URL}/api/insertPay`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount, date: today, user_id })
+        })
+        const text = await response.text()
+        console.log(text)
+
         setOpen(false);
         onSuccess();
     };

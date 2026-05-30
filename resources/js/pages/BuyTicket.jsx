@@ -12,6 +12,8 @@ const BuyTicket = () => {
   const [selectedMethod, setSelectedMethod] = useState(1)
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
 
+  const [amount, setAmount] = useState(1000)
+
   const navigate = useNavigate()
 
   const today = new Date().toISOString().split('T')[0];
@@ -132,9 +134,9 @@ const BuyTicket = () => {
       </main>
 
 
-      <Nequi open={openNequi} setOpen={setOpenNequi} onSuccess={onSuccess}></Nequi>
-      <CreditCard open={openCredicCard} setOpen={setOpenCreditCard} onSuccess={onSuccess}></CreditCard>
-      <PSE open={openPSE} setOpen={setOpenPSE} onSuccess={onSuccess}></PSE>
+      <Nequi open={openNequi} setOpen={setOpenNequi} onSuccess={onSuccess} amount={amount}></Nequi>
+      <CreditCard open={openCredicCard} setOpen={setOpenCreditCard} onSuccess={onSuccess} amount={amount}></CreditCard>
+      <PSE open={openPSE} setOpen={setOpenPSE} onSuccess={onSuccess} amount={amount}></PSE>
       {purchaseSuccess && <PurchaseSuccess onContinue={onContinue}></PurchaseSuccess>}
     </div>
   )

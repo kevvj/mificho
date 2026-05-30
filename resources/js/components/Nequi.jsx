@@ -1,15 +1,19 @@
 import { useState } from 'react';
 
-const Nequi = ({ onSuccess, open, setOpen }) => {
+const Nequi = ({ onSuccess, open, setOpen, amount }) => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [dynamicKey, setDynamicKey] = useState('');
     const [notRobot, setNotRobot] = useState(false);
     const [error, setError] = useState("")
 
-    const handlePay = () => {
+    const URL = import.meta.env.VITE_API_URL
+
+    const today = new Date().toISOString().split('T')[0];
+
+    const handlePay = async () => {
         if (phone.length < 10) {
-           
+
             setError("Ingresa un número válido")
 
             return;
@@ -19,9 +23,9 @@ const Nequi = ({ onSuccess, open, setOpen }) => {
             return;
         }
         if (dynamicKey.length < 6) {
-           
+
             setError("La clave dinámica debe tener 6 dígitos")
-            
+
             return;
         }
         if (!notRobot) {
@@ -29,8 +33,23 @@ const Nequi = ({ onSuccess, open, setOpen }) => {
 
             return;
         }
+
+        const user = JSON.parse(localStorage.getItem('user'));
+        const user_id = user.id_usuario;
+
+        const response = await fetch(`${URL}/api/insertPay`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount, date: today, user_id })
+        })
+        const text = await response.text()
+        console.log(text)
+
         setOpen(false);
-        onSuccess();
+
+
+
+         onSuccess();
     };
 
     return (

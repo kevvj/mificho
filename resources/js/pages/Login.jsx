@@ -25,7 +25,7 @@ const Login = () => {
     const [dato7, setDato7] = useState("")
     const [dato8, setDato8] = useState("")
 
-    const URL = "https://mificho.onrender.com"
+    const URL = import.meta.env.VITE_API_URL
 
     useEffect(() => {
         fetch(`${URL}/api/users`)
@@ -81,6 +81,7 @@ const Login = () => {
         console.log(data);
 
         if (response.ok) {
+            localStorage.setItem('user', JSON.stringify(data.user));
             navigate('/home');
         } else {
             setError('Contraseña o correo incorrectos!')
