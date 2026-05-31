@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import { useState } from 'react';
+import { API_URL } from '../config';
 
 const Profile = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -8,8 +9,22 @@ const Profile = () => {
     const [email, setEmail] = useState(user?.correo || 'kevin@universidad.edu.co');
     const [editing, setEditing] = useState(false);
 
-    const handleSave = () => {
-        setEditing(false);
+    const handleSave = async () => {
+        const response = await fetch(`${API_URL}/api/updateUser`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_usuario: user.id_usuario, name, email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem('user', JSON.stringify(data.user));
+            setEditing(false);
+            console.log('Actualizado correctamente');
+        } else {
+            console.log('Error al actualizar');
+        }
     };
 
     const handleLogout = () => {

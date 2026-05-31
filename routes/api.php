@@ -32,6 +32,8 @@ Route::post('/insertPay', [PurchaseController::class, 'store']);
 
 Route::post('/history', [HistoryController::class, 'index']);
 
+Route::post('/updateUser', [UserController::class, 'update']);
+
 
 
 

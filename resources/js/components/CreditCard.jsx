@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { API_URL } from '../config';
 
 
-const CreditCard = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId }) => {
+const CreditCard = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId, setAlreadyBought }) => {
     const [cardNumber, setCardNumber] = useState('');
     const [cardName, setCardName] = useState('');
     const [expiry, setExpiry] = useState('');
@@ -46,7 +46,7 @@ const CreditCard = ({ onSuccess, open, setOpen, amount, error, setError, setShow
             setOpen(false)
             return
         }
-
+        setAlreadyBought(true)
         setOpen(false);
         onSuccess();
     };

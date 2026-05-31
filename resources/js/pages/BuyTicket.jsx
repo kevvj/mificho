@@ -20,10 +20,32 @@ const BuyTicket = () => {
 
   const navigate = useNavigate()
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const todayDate = new Date().toLocaleString('sv-SE').split(' ')[0];
 
   const [coffeeShops, setCoffeeShops] = useState([]);
   const [selectedCoffeeShop, setSelectedCoffeeShop] = useState("");
+
+  const [alreadyBought, setAlreadyBought] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    fetch(`${API_URL}/api/history`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: user.id_usuario })
+    })
+      .then(res => res.json())
+      .then(data => {
+        const todayDate = new Date().toLocaleDateString('en-CA');
+        console.log('today:', todayDate);
+        console.log('fechas:', data.map(item => item.fecha));
+        const boughtToday = data.some(item => item.fecha.startsWith(todayDate));
+        console.log('boughtToday:', boughtToday);
+        setAlreadyBought(boughtToday);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   useEffect(() => {
     fetch(`${API_URL}/api/coffeestores`)
@@ -102,12 +124,9 @@ const BuyTicket = () => {
               </div>
 
               <div className="ticket-info-item">
-                <span className="ticket-label">
-                  Estado
-                </span>
-
-                <span className="ticket-value available">
-                  Disponible para compra
+                <span className="ticket-label">Estado</span>
+                <span className={`ticket-value ${alreadyBought ? 'bought' : 'available'}`}>
+                  {alreadyBought ? 'Ya compraste hoy' : 'Disponible para compra'}
                 </span>
               </div>
 
@@ -155,7 +174,10 @@ const BuyTicket = () => {
 
             </div>
 
-            <button className="confirm-button" onClick={() => handleButton()}>
+            <button
+              className={alreadyBought ? "confirm-button disabled-button" : "confirm-button"}
+              onClick={alreadyBought ? undefined : () => handleButton()}
+            >
               Pagar
             </button>
 
@@ -166,9 +188,9 @@ const BuyTicket = () => {
       </main>
 
 
-      <Nequi open={openNequi} setOpen={setOpenNequi} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError} coffeeShopId ={selectedCoffeeShop}></Nequi>
-      <CreditCard open={openCredicCard} setOpen={setOpenCreditCard} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError} coffeeShopId ={selectedCoffeeShop}></CreditCard>
-      <PSE open={openPSE} setOpen={setOpenPSE} onSuccess={onSuccess} amount={amount} setError={setError} error={error} setShowError={setShowError} coffeeShopId ={selectedCoffeeShop}></PSE>
+      <Nequi open={openNequi} setOpen={setOpenNequi} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError} coffeeShopId={selectedCoffeeShop} setAlreadyBought={setAlreadyBought}></Nequi>
+      <CreditCard open={openCredicCard} setOpen={setOpenCreditCard} onSuccess={onSuccess} amount={amount} error={error} setError={setError} setShowError={setShowError} coffeeShopId={selectedCoffeeShop} setAlreadyBought={setAlreadyBought}></CreditCard>
+      <PSE open={openPSE} setOpen={setOpenPSE} onSuccess={onSuccess} amount={amount} setError={setError} error={error} setShowError={setShowError} coffeeShopId={selectedCoffeeShop} setAlreadyBought={setAlreadyBought}></PSE>
       {purchaseSuccess && <PurchaseSuccess onContinue={onContinue}></PurchaseSuccess>}
       <ErrorAlert open={showError} setOpen={setShowError} message={error} onContinue={() => setShowError(false)}></ErrorAlert>
     </div>

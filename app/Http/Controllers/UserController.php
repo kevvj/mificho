@@ -42,4 +42,14 @@ class UserController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function update(Request $request)
+{
+    $user = Usuario::where('id_usuario', $request->id_usuario)->first();
+    $user->nombre = $request->name;
+    $user->correo = $request->email;
+    $user->save();
+
+    return response()->json(['message' => 'Updated', 'user' => $user], 200);
+}
 }

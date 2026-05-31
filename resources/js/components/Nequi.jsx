@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { API_URL } from '../config';
 
-const Nequi = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId  }) => {
+const Nequi = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId, setAlreadyBought }) => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [dynamicKey, setDynamicKey] = useState('');
@@ -52,7 +52,7 @@ const Nequi = ({ onSuccess, open, setOpen, amount, error, setError, setShowError
             setOpen(false);
             return;
         }
-
+        setAlreadyBought(true)
         setOpen(false);
         onSuccess();
     };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { API_URL } from '../config';
 
 
-const PSE = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId }) => {
+const PSE = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId, setAlreadyBought }) => {
     const [bank, setBank] = useState('');
     const [documentType, setDocumentType] = useState('');
     const [documentNumber, setDocumentNumber] = useState('');
@@ -46,6 +46,7 @@ const PSE = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, 
             setOpen(false);
             return;
         }
+        setAlreadyBought(true)
 
         setOpen(false);
         onSuccess();
