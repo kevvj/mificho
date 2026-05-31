@@ -1,0 +1,239 @@
+.panel-page {
+    min-height: 100vh;
+    background: #f4f6f4;
+}
+
+.panel-main {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 20px;
+}
+
+.panel-welcome {
+    background: #2d7a3a;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.panel-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+.panel-subtitle {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+}
+
+.panel-table-section {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.panel-table-title {
+    margin: 0;
+    color: #222;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.panel-table-wrapper {
+    overflow-x: auto;
+}
+
+.panel-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.panel-table th {
+    background: #f4f9f5;
+    color: #444;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #e8ebe8;
+}
+
+.panel-table td {
+    padding: 12px 16px;
+    color: #555;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.panel-table tr:last-child td {
+    border-bottom: none;
+}
+
+.panel-table tr:hover td {
+    background: #f9fbf9;
+}
+
+.panel-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.panel-badge--estudiante {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.panel-badge--vendedor {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.panel-badge--validador {
+    background: #f0f9f2;
+    color: #2d7a3a;
+}
+
+.panel-select {
+    height: 34px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 0 10px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.panel-select:focus {
+    border-color: #2d7a3a;
+}
+
+.panel-expand {
+    align-self: center;
+    padding: 10px 28px;
+    border: 2px solid #2d7a3a;
+    border-radius: 10px;
+    background: white;
+    color: #2d7a3a;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.panel-expand:hover {
+    background: #2d7a3a;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .panel-main {
+        margin: 20px auto;
+        gap: 15px;
+        padding: 0 12px;
+    }
+
+    .panel-title {
+        font-size: 1.4rem;
+    }
+
+    .panel-table-section {
+        padding: 20px;
+    }
+
+    .panel-table th,
+    .panel-table td {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .panel-title {
+        font-size: 1.2rem;
+    }
+}
+
+.panel-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-add-button {
+    padding: 8px 16px;
+    border: 2px solid #2d7a3a;
+    border-radius: 10px;
+    background: white;
+    color: #2d7a3a;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.panel-add-button:hover {
+    background: #2d7a3a;
+    color: white;
+}
+
+.panel-add-form {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: #f4f9f5;
+    border-radius: 12px;
+}
+
+.panel-form-input {
+    flex: 1;
+    height: 42px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 0 14px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.panel-form-input:focus {
+    border-color: #2d7a3a;
+}
+
+.panel-form-submit {
+    height: 42px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 8px;
+    background: #2d7a3a;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.panel-form-submit:hover {
+    background: #246030;
+}
+
+@media (max-width: 480px) {
+    .panel-add-form {
+        flex-direction: column;
+    }
+
+    .panel-form-submit {
+        width: 100%;
+    }
+}
