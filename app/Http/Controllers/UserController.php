@@ -44,12 +44,30 @@ class UserController extends Controller
     }
 
     public function update(Request $request)
-{
-    $user = Usuario::where('id_usuario', $request->id_usuario)->first();
-    $user->nombre = $request->name;
-    $user->correo = $request->email;
-    $user->save();
+    {
+        $user = Usuario::where('id_usuario', $request->id_usuario)->first();
+        $user->nombre = $request->name;
+        $user->correo = $request->email;
+        $user->save();
 
-    return response()->json(['message' => 'Updated', 'user' => $user], 200);
-}
+        return response()->json(['message' => 'Updated', 'user' => $user], 200);
+    }
+    public function find(Request $request)
+    {
+        try {
+            $search = $request->input('query');
+
+            $user = Usuario::where('id_usuario', $search)
+                ->orWhere('correo', $search)
+                ->first();
+
+            if (!$user) {
+                return response()->json(['error' => 'Usuario no encontrado'], 404);
+            }
+
+            return response()->json($user, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

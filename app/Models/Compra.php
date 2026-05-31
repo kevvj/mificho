@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\DetalleCompra;
 use App\Models\Cafeteria;
+use App\Models\Usuario;
 
 
 class Compra extends Model
@@ -20,7 +21,12 @@ class Compra extends Model
     }
 
     public function cafeteria()
-{
-    return $this->belongsTo(Cafeteria::class, 'id_cafeteria');
-}
+    {
+        return $this->belongsTo(Cafeteria::class, 'id_cafeteria');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'id_usuario');
+    }
 }

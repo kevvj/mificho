@@ -34,6 +34,10 @@ Route::post('/history', [HistoryController::class, 'index']);
 
 Route::post('/updateUser', [UserController::class, 'update']);
 
+Route::post('/findUser', [UserController::class, 'find']);
+
+Route::get('/recentSales', [HistoryController::class, 'recentSales']);
+
 
 
 

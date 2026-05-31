@@ -197,3 +197,74 @@
         font-size: 1.2rem;
     }
 }
+
+.seller-button-search {
+    height: 46px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 10px;
+    background: #4b5563;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.seller-button-search:hover {
+    background: #374151;
+}
+
+.seller-found-user {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 16px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+
+.seller-found-label {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.seller-found-name {
+    font-weight: 700;
+    color: #222;
+    font-size: 1rem;
+}
+
+.seller-found-email {
+    color: #2d7a3a;
+    font-size: 0.85rem;
+}
+
+.seller-cafeteria-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.seller-error {
+    margin-top: 12px;
+    color: #dc2626;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.seller-success {
+    margin-top: 12px;
+    color: #2d7a3a;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .seller-cafeteria-row {
+        flex-direction: column;
+    }
+}
