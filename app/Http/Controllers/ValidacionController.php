@@ -62,4 +62,28 @@ class ValidacionController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    public function allValidations(Request $request)
+    {
+        try {
+            $offset = $request->query('offset', 0);
+
+            $validations = Validacion::with(['cafeteria'])
+                ->orderBy('fecha', 'desc')
+                ->skip($offset)
+                ->take(10)
+                ->get()
+                ->map(function ($v) {
+                    return [
+                        'id_validacion' => $v->id_validacion,
+                        'fecha' => $v->fecha,
+                        'cafeteria' => $v->cafeteria->nombre ?? 'Desconocida',
+                        'id_ficho' => $v->id_ficho,
+                    ];
+                });
+
+            return response()->json($validations, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

@@ -1,17 +1,27 @@
 import Header from './Header';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 
 const ValidatorHistory = () => {
-    const navigate = useNavigate();
+    const [validations, setValidations] = useState([]);
+    const [offset, setOffset] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    const mockValidations = [
-        { id: 1, student: 'Kevin Tapias', cafeteria: 'Cafetería Central', date: '2026-05-30 07:30:00', status: 'Válido' },
-        { id: 2, student: 'Danna Banda', cafeteria: 'Cafetería Central', date: '2026-05-30 07:45:00', status: 'Válido' },
-        { id: 3, student: 'Dana Hernandez', cafeteria: 'Cafetería Laboratorios', date: '2026-05-30 08:00:00', status: 'Inválido' },
-        { id: 4, student: 'Jose Perez', cafeteria: 'Cafetería Central', date: '2026-05-29 12:00:00', status: 'Válido' },
-        { id: 5, student: 'Alejandra Lopez', cafeteria: 'Cafetería Laboratorios', date: '2026-05-29 12:30:00', status: 'Válido' },
-    ];
+    async function loadValidations(currentOffset) {
+        setLoading(true);
+        const res = await fetch(`${API_URL}/api/allValidations?offset=${currentOffset}`);
+        const data = await res.json();
+        setLoading(false);
+        if (!Array.isArray(data)) return;
+        if (data.length < 10) setHasMore(false);
+        setValidations(prev => [...prev, ...data]);
+        setOffset(currentOffset + data.length);
+    }
+
+    useEffect(() => {
+        loadValidations(0);
+    }, []);
 
     return (
         <div className="validator-history-page">
@@ -24,21 +34,29 @@ const ValidatorHistory = () => {
                 </section>
 
                 <section className="validator-history-container">
-                    {mockValidations.length === 0 ? (
+                    {validations.length === 0 && !loading ? (
                         <p className="validator-history-empty">No hay validaciones registradas.</p>
                     ) : (
-                        mockValidations.map(v => (
-                            <div key={v.id} className="validator-history-item">
+                        validations.map(v => (
+                            <div key={v.id_validacion} className="validator-history-item">
                                 <div className="validator-history-info">
-                                    <span className="validator-history-student">{v.student}</span>
+                                    <span className="validator-history-student">Ficho #{v.id_ficho}</span>
                                     <span className="validator-history-cafeteria">{v.cafeteria}</span>
-                                    <span className="validator-history-date">{v.date}</span>
+                                    <span className="validator-history-date">{v.fecha}</span>
                                 </div>
-                                <span className={`validator-history-status ${v.status === 'Válido' ? 'status-valid' : 'status-invalid'}`}>
-                                    {v.status}
+                                <span className="validator-history-status status-valid">
+                                    Válido
                                 </span>
                             </div>
                         ))
+                    )}
+
+                    {loading && <p className="validator-history-empty">Cargando...</p>}
+
+                    {!loading && hasMore && (
+                        <button className="seller-button" onClick={() => loadValidations(offset)}>
+                            Cargar más
+                        </button>
                     )}
                 </section>
 

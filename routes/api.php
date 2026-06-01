@@ -52,3 +52,4 @@ Route::post('/validateTicket', [ValidacionController::class, 'validate']);
 
 Route::get('/recentValidations', [ValidacionController::class, 'recentValidations']);
 
+Route::get('/allValidations', [ValidacionController::class, 'allValidations']);
