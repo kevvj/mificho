@@ -19,7 +19,9 @@ const HomeSeller = () => {
     useEffect(() => {
         fetch(`${API_URL}/api/recentSales`)
             .then(res => res.json())
-            .then(data => setRecentSales(data));
+            .then(data => {
+                if (Array.isArray(data)) setRecentSales(data);
+            });
     }, []);
 
     useEffect(() => {
