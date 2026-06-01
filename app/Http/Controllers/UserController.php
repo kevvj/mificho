@@ -57,9 +57,9 @@ class UserController extends Controller
         try {
             $search = $request->input('query');
 
-            $user = Usuario::where('id_usuario', $search)
-                ->orWhere('correo', $search)
-                ->first();
+            $user = is_numeric($search)
+                ? Usuario::where('id_usuario', (int) $search)->first()
+                : Usuario::where('correo', $search)->first();
 
             if (!$user) {
                 return response()->json(['error' => 'Usuario no encontrado'], 404);
