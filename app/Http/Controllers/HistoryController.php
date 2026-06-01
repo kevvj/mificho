@@ -15,19 +15,22 @@ class HistoryController extends Controller
 
         return response()->json($history, 200);
     }
-    public function recentSales()
+    public function recentSales(Request $request)
     {
         try {
+            $offset = $request->query('offset', 0);
+
             $sales = Compra::with(['usuario', 'cafeteria'])
                 ->orderBy('fecha', 'desc')
+                ->skip($offset)
                 ->take(5)
                 ->get()
                 ->map(function ($compra) {
                     return [
                         'id_compra' => $compra->id_compra,
-                        'nombre' => $compra->usuario->nombre,
-                        'correo' => $compra->usuario->correo,
-                        'cafeteria' => $compra->cafeteria->nombre,
+                        'nombre' => $compra->usuario->nombre ?? 'Desconocido',
+                        'correo' => $compra->usuario->correo ?? '-',
+                        'cafeteria' => $compra->cafeteria->nombre ?? 'Desconocida',
                         'fecha' => $compra->fecha,
                         'total' => $compra->total,
                     ];
@@ -52,9 +55,9 @@ class HistoryController extends Controller
                 ->map(function ($compra) {
                     return [
                         'id_compra' => $compra->id_compra,
-                        'nombre' => $compra->usuario->nombre,
-                        'correo' => $compra->usuario->correo,
-                        'cafeteria' => $compra->cafeteria->nombre,
+                        'nombre' => $compra->usuario->nombre ?? 'Desconocido',
+                        'correo' => $compra->usuario->correo ?? '-',
+                        'cafeteria' => $compra->cafeteria->nombre ?? 'Desconocida',
                         'fecha' => $compra->fecha,
                         'total' => $compra->total,
                     ];
