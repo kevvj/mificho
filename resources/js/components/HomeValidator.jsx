@@ -25,13 +25,13 @@ const HomeValidator = () => {
     async function handleScan(ticketId) {
         setScanError('');
         setScanResult(null);
+        await stopCamera();
         const res = await fetch(`${API_URL}/api/validateTicket`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ticket_id: ticketId, coffee_shop_id: selectedCoffeeShop })
         });
         const data = await res.json();
-        stopCamera();
         if (!res.ok) {
             setScanError(data.error);
         } else {
@@ -57,18 +57,26 @@ const HomeValidator = () => {
                 { facingMode: 'environment' },
                 { fps: 10, qrbox: { width: 200, height: 200 } },
                 (decodedText) => { handleScan(decodedText); },
-                () => {}
+                () => { }
             ).catch(() => setScanError('No se pudo acceder a la cámara'));
         }, 100);
     }
 
     function stopCamera() {
-        if (scannerRef.current) {
-            scannerRef.current.stop().then(() => {
-                scannerRef.current = null;
-                setCameraActive(false);
-            }).catch(() => setCameraActive(false));
-        }
+        return new Promise((resolve) => {
+            if (scannerRef.current) {
+                scannerRef.current.stop().then(() => {
+                    scannerRef.current = null;
+                    setCameraActive(false);
+                    resolve();
+                }).catch(() => {
+                    setCameraActive(false);
+                    resolve();
+                });
+            } else {
+                resolve();
+            }
+        });
     }
 
     return (
