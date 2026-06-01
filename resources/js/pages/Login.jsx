@@ -16,7 +16,7 @@ const Login = () => {
 
 
     const [dato1, setDato1] = useState("")
-    const [dato2, setDato2] = useState("@universidad.edu.co")
+    const [dato2, setDato2] = useState("@unicordoba.edu.co")
     const [dato3, setDato3] = useState("estudiante")
     const [dato4, setDato4] = useState("1234")
 
