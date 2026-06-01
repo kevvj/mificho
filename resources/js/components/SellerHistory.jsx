@@ -13,11 +13,12 @@ const SellerHistory = () => {
         const res = await fetch(`${API_URL}/api/allSales?offset=${currentOffset}`);
         const data = await res.json();
         setLoading(false);
+        if (!res.ok || !Array.isArray(data)) return;
         if (data.length < 10) setHasMore(false);
         setSales(prev => [...prev, ...data]);
         setOffset(currentOffset + data.length);
     }
-
+    
     useEffect(() => {
         loadSales(0);
     }, []);
