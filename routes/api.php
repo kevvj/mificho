@@ -8,7 +8,7 @@ use App\Http\Controllers\CoffeStoreController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\FichoController;
-
+use App\Http\Controllers\ValidacionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -47,4 +47,8 @@ Route::get('/fichos', [FichoController::class, 'index']);
 Route::get('/allPurchases', [PurchaseController::class, 'allPurchases']);
 
 Route::post('/updateTicket', [FichoController::class, 'updateStatus']);
+
+Route::post('/validateTicket', [ValidacionController::class, 'validate']);
+
+Route::get('/recentValidations', [ValidacionController::class, 'recentValidations']);
 

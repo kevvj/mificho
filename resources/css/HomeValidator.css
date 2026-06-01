@@ -216,3 +216,33 @@
         font-size: 1.2rem;
     }
 }
+
+.scanner-select {
+    width: 100%;
+    max-width: 300px;
+    height: 46px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.scanner-select:focus {
+    border-color: #2d7a3a;
+}
+
+.scanner-success {
+    color: #2d7a3a;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.scanner-error {
+    color: #dc2626;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0;
+}
