@@ -225,3 +225,10 @@
         height: 130px;
     }
 }
+
+.qr-empty {
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+    margin: 0;
+}
