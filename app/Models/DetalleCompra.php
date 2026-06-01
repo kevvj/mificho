@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Ficho;
+use App\Models\Compra;
+
 
 class DetalleCompra extends Model
 {
@@ -16,5 +18,10 @@ class DetalleCompra extends Model
     {
         return $this->belongsTo(Ficho::class, 'id_ficho');
     }
-    
+
+    public function compra()
+    {
+        return $this->belongsTo(Compra::class, 'id_compra');
+    }
+
 }

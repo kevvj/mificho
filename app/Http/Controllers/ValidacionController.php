@@ -11,7 +11,7 @@ class ValidacionController extends Controller
     public function validate(Request $request)
     {
         try {
-            $ticket = Ficho::where('id_ficho', $request->ticket_id)->first();
+            $ticket = Ficho::with(['detalleCompra.compra'])->where('id_ficho', $request->ticket_id)->first();
 
             if (!$ticket) {
                 return response()->json(['error' => 'Ficho no encontrado'], 404);
@@ -19,6 +19,12 @@ class ValidacionController extends Controller
 
             if ($ticket->estado !== 'Disponible') {
                 return response()->json(['error' => 'Ficho no válido'], 400);
+            }
+
+            $coffeeShopId = $ticket->detalleCompra->compra->id_cafeteria;
+
+            if ((int) $coffeeShopId !== (int) $request->coffee_shop_id) {
+                return response()->json(['error' => 'Este ficho no corresponde a esta cafetería'], 400);
             }
 
             $ticket->estado = 'Usado';
@@ -35,7 +41,6 @@ class ValidacionController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
     public function recentValidations()
     {
         try {
