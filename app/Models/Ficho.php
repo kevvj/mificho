@@ -9,7 +9,7 @@ class Ficho extends Model
     protected $table = 'ficho';
     public $timestamps = false;
     protected $primaryKey = 'id_ficho';
-    protected $fillable = ['precio', 'estado', 'fecha_creación'];
+    protected $fillable = ['precio', 'estado', 'fecha_creacion'];
 
     
 }

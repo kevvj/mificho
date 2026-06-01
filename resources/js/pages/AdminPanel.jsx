@@ -1,39 +1,8 @@
 import Header from '../components/Header';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
 
-const mockUsuarios = [
-    { id_usuario: 1, nombre: 'Kevin Tapias', correo: 'kevin@universidad.edu.co', tipo_usuario: 'estudiante' },
-    { id_usuario: 2, nombre: 'Danna Banda', correo: 'danna@universidad.edu.co', tipo_usuario: 'estudiante' },
-    { id_usuario: 3, nombre: 'Dana Hernandez', correo: 'dana@universidad.edu.co', tipo_usuario: 'estudiante' },
-    { id_usuario: 4, nombre: 'Jose Perez', correo: 'jose@universidad.edu.co', tipo_usuario: 'vendedor' },
-    { id_usuario: 5, nombre: 'Alejandra Lopez', correo: 'alejandra@universidad.edu.co', tipo_usuario: 'validador' },
-    { id_usuario: 6, nombre: 'Carlos Ruiz', correo: 'carlos@universidad.edu.co', tipo_usuario: 'estudiante' },
-    { id_usuario: 7, nombre: 'Maria Garcia', correo: 'maria@universidad.edu.co', tipo_usuario: 'estudiante' },
-    { id_usuario: 8, nombre: 'Luis Martinez', correo: 'luis@universidad.edu.co', tipo_usuario: 'estudiante' },
-];
-
-const mockFichos = [
-    { id_ficho: 1, precio: 1000, estado: 'Disponible', fecha_creacion: '2026-05-30 07:30:00' },
-    { id_ficho: 2, precio: 1000, estado: 'Usado', fecha_creacion: '2026-05-30 07:45:00' },
-    { id_ficho: 3, precio: 1000, estado: 'Disponible', fecha_creacion: '2026-05-30 08:00:00' },
-    { id_ficho: 4, precio: 1000, estado: 'Vencido', fecha_creacion: '2026-05-29 12:00:00' },
-    { id_ficho: 5, precio: 1000, estado: 'Disponible', fecha_creacion: '2026-05-29 12:30:00' },
-    { id_ficho: 6, precio: 1000, estado: 'Usado', fecha_creacion: '2026-05-28 07:30:00' },
-    { id_ficho: 7, precio: 1000, estado: 'Disponible', fecha_creacion: '2026-05-28 08:00:00' },
-    { id_ficho: 8, precio: 1000, estado: 'Usado', fecha_creacion: '2026-05-27 07:30:00' },
-];
-
-const mockCompras = [
-    { id_compra: 1, total: 1000, fecha: '2026-05-30', id_usuario: 1, id_cafeteria: 1 },
-    { id_compra: 2, total: 1000, fecha: '2026-05-30', id_usuario: 2, id_cafeteria: 2 },
-    { id_compra: 3, total: 1000, fecha: '2026-05-29', id_usuario: 3, id_cafeteria: 1 },
-    { id_compra: 4, total: 1000, fecha: '2026-05-29', id_usuario: 1, id_cafeteria: 2 },
-    { id_compra: 5, total: 1000, fecha: '2026-05-28', id_usuario: 4, id_cafeteria: 1 },
-    { id_compra: 6, total: 1000, fecha: '2026-05-28', id_usuario: 2, id_cafeteria: 2 },
-    { id_compra: 7, total: 1000, fecha: '2026-05-27', id_usuario: 5, id_cafeteria: 1 },
-    { id_compra: 8, total: 1000, fecha: '2026-05-27', id_usuario: 3, id_cafeteria: 2 },
-];
 
 const INITIAL_SHOW = 6;
 
@@ -41,10 +10,7 @@ const TablePanel = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const navigate = useNavigate();
 
-    const [showUsuarios, setShowUsuarios] = useState(INITIAL_SHOW);
-    const [showFichos, setShowFichos] = useState(INITIAL_SHOW);
     const [showCompras, setShowCompras] = useState(INITIAL_SHOW);
-    const [fichos, setFichos] = useState(mockFichos);
     const [cafeterias, setCafeterias] = useState([
         { id_cafeteria: 1, nombre: 'Cafetería Central', ubicacion: 'Bloque A piso 1' },
         { id_cafeteria: 2, nombre: 'Cafetería Laboratorios', ubicacion: 'Bloque de Laboratorios piso 1' },
@@ -52,23 +18,84 @@ const TablePanel = () => {
     const [showAddCafeteria, setShowAddCafeteria] = useState(false);
     const [newCafeteria, setNewCafeteria] = useState({ nombre: '', ubicacion: '' });
 
+    const [showUsers, setShowUsers] = useState(INITIAL_SHOW);
+    const [users, setUsers] = useState([]);
+
+    const [tickets, setTickets] = useState([]);
+    const [showTickets, setShowTickets] = useState(INITIAL_SHOW);
+
+    const [purchases, setPurchases] = useState([]);
+    const [showPurchases, setShowPurchases] = useState(INITIAL_SHOW);
+
+    const [showAddCoffeeShop, setShowAddCoffeeShop] = useState(false);
+    const [newCoffeeShop, setNewCoffeeShop] = useState({ name: '', location: '' });
+
+    const [coffeeShops, setCoffeeShops] = useState([]);
+    useEffect(() => {
+        fetch(`${API_URL}/api/users`)
+            .then(res => res.json())
+            .then(data => setUsers(data));
+    }, []);
+
+    useEffect(() => {
+        fetch(`${API_URL}/api/fichos`)
+            .then(res => res.json())
+            .then(data => setTickets(data));
+    }, []);
+
+    useEffect(() => {
+        fetch(`${API_URL}/api/allPurchases`)
+            .then(res => res.json())
+            .then(data => setPurchases(data));
+    }, []);
+
+    useEffect(() => {
+        fetch(`${API_URL}/api/coffeestores`)
+            .then(res => res.json())
+            .then(data => setCoffeeShops(data));
+    }, []);
+
     useEffect(() => {
         if (user?.tipo_usuario === 'estudiante' || !user) {
             navigate('/home');
         }
     }, []);
 
-    const handleEstadoChange = (id, newEstado) => {
-        setFichos(prev => prev.map(f => f.id_ficho === id ? { ...f, estado: newEstado } : f));
+    const handleStatusChange = (id, newStatus) => {
+        setTickets(prev => prev.map(t => t.id_ficho === id ? { ...t, estado: newStatus } : t));
+
+        fetch(`${API_URL}/api/updateTicket`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, status: newStatus })
+        });
     };
 
-    const handleAddCafeteria = () => {
-        if (!newCafeteria.nombre || !newCafeteria.ubicacion) return;
-        const newId = cafeterias.length + 1;
-        setCafeterias(prev => [...prev, { id_cafeteria: newId, ...newCafeteria }]);
-        setNewCafeteria({ nombre: '', ubicacion: '' });
-        setShowAddCafeteria(false);
-    };
+
+
+    async function handleAddCoffeeShop() {
+        if (!newCoffeeShop.name || !newCoffeeShop.location) return;
+        const res = await fetch(`${API_URL}/api/insertCoff`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: newCoffeeShop.name, location: newCoffeeShop.location })
+        });
+        if (!res.ok) return;
+        setNewCoffeeShop({ name: '', location: '' });
+        setShowAddCoffeeShop(false);
+        fetch(`${API_URL}/api/coffeestores`)
+            .then(res => res.json())
+            .then(data => setCoffeeShops(data));
+    }
+
+    async function handleInvalidateOld() {
+        const res = await fetch(`${API_URL}/api/invalidateOld`, { method: 'POST' });
+        const data = await res.json();
+        if (!res.ok) return;
+        fetch(`${API_URL}/api/fichos`)
+            .then(res => res.json())
+            .then(data => setTickets(data));
+    }
 
     return (
         <>
@@ -95,7 +122,7 @@ const TablePanel = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {mockUsuarios.slice(0, showUsuarios).map(u => (
+                                    {users.slice(0, showUsers).map(u => (
                                         <tr key={u.id_usuario}>
                                             <td>{u.id_usuario}</td>
                                             <td>{u.nombre}</td>
@@ -106,8 +133,8 @@ const TablePanel = () => {
                                 </tbody>
                             </table>
                         </div>
-                        {showUsuarios < mockUsuarios.length && (
-                            <button className="panel-expand" onClick={() => setShowUsuarios(prev => prev + 6)}>
+                        {showUsers < users.length && (
+                            <button className="panel-expand" onClick={() => setShowUsers(prev => prev + 6)}>
                                 Ver más
                             </button>
                         )}
@@ -115,7 +142,12 @@ const TablePanel = () => {
 
                     {/* Fichos */}
                     <section className="panel-table-section">
-                        <h3 className="panel-table-title">Fichos</h3>
+                        <div className="panel-table-header">
+                            <h3 className="panel-table-title">Fichos</h3>
+                            <button className="panel-add-button" onClick={handleInvalidateOld}>
+                                Invalidar vencidos
+                            </button>
+                        </div>
                         <div className="panel-table-wrapper">
                             <table className="panel-table">
                                 <thead>
@@ -127,29 +159,29 @@ const TablePanel = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {fichos.slice(0, showFichos).map(f => (
-                                        <tr key={f.id_ficho}>
-                                            <td>{f.id_ficho}</td>
-                                            <td>${Number(f.precio).toLocaleString('es-CO')}</td>
+                                    {tickets.slice(0, showTickets).map(t => (
+                                        <tr key={t.id_ficho}>
+                                            <td>{t.id_ficho}</td>
+                                            <td>${Number(t.precio).toLocaleString('es-CO')}</td>
                                             <td>
                                                 <select
                                                     className="panel-select"
-                                                    value={f.estado}
-                                                    onChange={(e) => handleEstadoChange(f.id_ficho, e.target.value)}
+                                                    value={t.estado}
+                                                    onChange={(e) => handleStatusChange(t.id_ficho, e.target.value)}
                                                 >
                                                     <option>Disponible</option>
                                                     <option>Usado</option>
                                                     <option>Vencido</option>
                                                 </select>
                                             </td>
-                                            <td>{f.fecha_creacion}</td>
+                                            <td>{t.fecha_creacion}</td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                         </div>
-                        {showFichos < fichos.length && (
-                            <button className="panel-expand" onClick={() => setShowFichos(prev => prev + 6)}>
+                        {showTickets < tickets.length && (
+                            <button className="panel-expand" onClick={() => setShowTickets(prev => prev + 6)}>
                                 Ver más
                             </button>
                         )}
@@ -170,20 +202,20 @@ const TablePanel = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {mockCompras.slice(0, showCompras).map(c => (
-                                        <tr key={c.id_compra}>
-                                            <td>{c.id_compra}</td>
-                                            <td>${Number(c.total).toLocaleString('es-CO')}</td>
-                                            <td>{c.fecha}</td>
-                                            <td>{c.id_usuario}</td>
-                                            <td>{c.id_cafeteria}</td>
+                                    {purchases.slice(0, showPurchases).map(p => (
+                                        <tr key={p.id_compra}>
+                                            <td>{p.id_compra}</td>
+                                            <td>${Number(p.total).toLocaleString('es-CO')}</td>
+                                            <td>{p.fecha}</td>
+                                            <td>{p.id_usuario}</td>
+                                            <td>{p.id_cafeteria}</td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                         </div>
-                        {showCompras < mockCompras.length && (
-                            <button className="panel-expand" onClick={() => setShowCompras(prev => prev + 6)}>
+                        {showPurchases < purchases.length && (
+                            <button className="panel-expand" onClick={() => setShowPurchases(prev => prev + 6)}>
                                 Ver más
                             </button>
                         )}
@@ -193,28 +225,28 @@ const TablePanel = () => {
                     <section className="panel-table-section">
                         <div className="panel-table-header">
                             <h3 className="panel-table-title">Cafeterías</h3>
-                            <button className="panel-add-button" onClick={() => setShowAddCafeteria(!showAddCafeteria)}>
-                                {showAddCafeteria ? 'Cancelar' : '+ Agregar cafetería'}
+                            <button className="panel-add-button" onClick={() => setShowAddCoffeeShop(!showAddCoffeeShop)}>
+                                {showAddCoffeeShop ? 'Cancelar' : '+ Agregar cafetería'}
                             </button>
                         </div>
 
-                        {showAddCafeteria && (
+                        {showAddCoffeeShop && (
                             <div className="panel-add-form">
                                 <input
                                     className="panel-form-input"
                                     type="text"
                                     placeholder="Nombre de la cafetería"
-                                    value={newCafeteria.nombre}
-                                    onChange={(e) => setNewCafeteria(prev => ({ ...prev, nombre: e.target.value }))}
+                                    value={newCoffeeShop.name}
+                                    onChange={(e) => setNewCoffeeShop(prev => ({ ...prev, name: e.target.value }))}
                                 />
                                 <input
                                     className="panel-form-input"
                                     type="text"
                                     placeholder="Ubicación"
-                                    value={newCafeteria.ubicacion}
-                                    onChange={(e) => setNewCafeteria(prev => ({ ...prev, ubicacion: e.target.value }))}
+                                    value={newCoffeeShop.location}
+                                    onChange={(e) => setNewCoffeeShop(prev => ({ ...prev, location: e.target.value }))}
                                 />
-                                <button className="panel-form-submit" onClick={handleAddCafeteria}>
+                                <button className="panel-form-submit" onClick={handleAddCoffeeShop}>
                                     Guardar
                                 </button>
                             </div>
@@ -230,7 +262,7 @@ const TablePanel = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {cafeterias.map(c => (
+                                    {coffeeShops.map(c => (
                                         <tr key={c.id_cafeteria}>
                                             <td>{c.id_cafeteria}</td>
                                             <td>{c.nombre}</td>
@@ -241,7 +273,6 @@ const TablePanel = () => {
                             </table>
                         </div>
                     </section>
-
                 </main>
             </div>
         </>
@@ -249,3 +280,4 @@ const TablePanel = () => {
 };
 
 export default TablePanel;
+

@@ -7,7 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CoffeStoreController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\HistoryController;
-
+use App\Http\Controllers\FichoController;
 
 
 Route::get('/user', function (Request $request) {
@@ -40,6 +40,11 @@ Route::get('/recentSales', [HistoryController::class, 'recentSales']);
 
 Route::get('/allSales', [HistoryController::class, 'allSales']);
 
+Route::post('/invalidateOld', [FichoController::class, 'invalidateOld']);
 
+Route::get('/fichos', [FichoController::class, 'index']);
 
+Route::get('/allPurchases', [PurchaseController::class, 'allPurchases']);
+
+Route::post('/updateTicket', [FichoController::class, 'updateStatus']);
 

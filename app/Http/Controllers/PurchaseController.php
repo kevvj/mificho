@@ -40,4 +40,14 @@ class PurchaseController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function allPurchases()
+    {
+        try {
+            $purchases = Compra::orderBy('fecha', 'desc')->get();
+            return response()->json($purchases, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }
