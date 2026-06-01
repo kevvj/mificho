@@ -11,6 +11,7 @@ class HistoryController extends Controller
     {
         $history = Compra::with(['detalleCompra.ficho', 'cafeteria'])
             ->where('id_usuario', (int) $request->user_id)
+            ->orderBy('fecha', 'desc')
             ->get();
 
         return response()->json($history, 200);
