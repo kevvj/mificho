@@ -21,10 +21,6 @@ class ValidacionController extends Controller
                 return response()->json(['error' => 'Ficho no válido'], 400);
             }
 
-            if (!\Carbon\Carbon::parse($ticket->fecha_creacion)->isToday()) {
-                return response()->json(['error' => 'Ficho vencido'], 400);
-            }
-
             $ticket->estado = 'Usado';
             $ticket->save();
 
