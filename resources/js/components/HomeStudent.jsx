@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import { useEffect, useState } from 'react';
 import { API_URL } from '../config';
+import { QRCodeSVG } from 'qrcode.react';
 
 const HomeStudent = () => {
   const navigate = useNavigate();
@@ -21,10 +22,18 @@ const HomeStudent = () => {
       body: JSON.stringify({ user_id: user.id_usuario })
     })
       .then(res => res.json())
-      .then(data => setRecentHistory(data.slice(0, 3)))
+      .then(data => {
+        setRecentHistory(data.slice(0, 3));
+        console.log(data);
+      })
       .catch(err => console.log(err));
   }, []);
 
+  const todayTicket = recentHistory.find(item => {
+    const ticketDate = item.fecha.split(' ')[0];
+    const today = new Date().toLocaleDateString('sv-SE');
+    return ticketDate === today && item.detalle_compra[0]?.ficho?.estado === 'Disponible';
+  });
   return (
     <div className="home-student">
       <Header></Header>
@@ -38,7 +47,14 @@ const HomeStudent = () => {
         <section className="ticket-section">
           <div className="qr-card">
             <div className="qr-container">
-              <img className="qr-img" src="qrcode.png"></img>
+              {todayTicket ? (
+                <QRCodeSVG
+                  value={String(todayTicket.detalle_compra[0]?.ficho?.id_ficho)}
+                  size={180}
+                />
+              ) : (
+                <p className="qr-empty">Sin ficho disponible hoy</p>
+              )}
             </div>
           </div>
 

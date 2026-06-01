@@ -10,7 +10,7 @@ class FichoController extends Controller
     public function invalidateOld()
     {
         try {
-            $count = Ficho::where('estado', 'Disponible')
+            $count = Ficho::whereIn('estado', ['Disponible', 'Usado'])
                 ->whereDate('fecha_creacion', '<', now()->toDateString())
                 ->update(['estado' => 'Vencido']);
 
