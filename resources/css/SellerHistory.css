@@ -114,3 +114,10 @@
         font-size: 1.2rem;
     }
 }
+
+.seller-history-container .seller-button {
+    margin-top: 8px;
+    align-self: center;
+    width: fit-content;
+    padding: 0 32px;
+}

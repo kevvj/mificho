@@ -38,6 +38,8 @@ Route::post('/findUser', [UserController::class, 'find']);
 
 Route::get('/recentSales', [HistoryController::class, 'recentSales']);
 
+Route::get('/allSales', [HistoryController::class, 'allSales']);
+
 
 
 

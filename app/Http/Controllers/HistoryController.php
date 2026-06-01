@@ -38,4 +38,31 @@ class HistoryController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function allSales(Request $request)
+    {
+        try {
+            $offset = $request->query('offset', 0);
+
+            $sales = Compra::with(['usuario', 'cafeteria'])
+                ->orderBy('fecha', 'desc')
+                ->skip($offset)
+                ->take(10)
+                ->get()
+                ->map(function ($compra) {
+                    return [
+                        'id_compra' => $compra->id_compra,
+                        'nombre' => $compra->usuario->nombre,
+                        'correo' => $compra->usuario->correo,
+                        'cafeteria' => $compra->cafeteria->nombre,
+                        'fecha' => $compra->fecha,
+                        'total' => $compra->total,
+                    ];
+                });
+
+            return response()->json($sales, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

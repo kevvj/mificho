@@ -1,13 +1,26 @@
 import Header from '../components/Header';
+import { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 
 const SellerHistory = () => {
-    const mockSales = [
-        { id: 1, student: 'Kevin Tapias', cafeteria: 'Cafetería Central', date: '2026-05-30 07:30:00', amount: '$1.000' },
-        { id: 2, student: 'Danna Banda', cafeteria: 'Cafetería Central', date: '2026-05-30 07:45:00', amount: '$1.000' },
-        { id: 3, student: 'Dana Hernandez', cafeteria: 'Cafetería Laboratorios', date: '2026-05-30 08:00:00', amount: '$1.000' },
-        { id: 4, student: 'Jose Perez', cafeteria: 'Cafetería Central', date: '2026-05-29 12:00:00', amount: '$1.000' },
-        { id: 5, student: 'Alejandra Lopez', cafeteria: 'Cafetería Laboratorios', date: '2026-05-29 12:30:00', amount: '$1.000' },
-    ];
+    const [sales, setSales] = useState([]);
+    const [offset, setOffset] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
+    const [loading, setLoading] = useState(false);
+
+    async function loadSales(currentOffset) {
+        setLoading(true);
+        const res = await fetch(`${API_URL}/api/allSales?offset=${currentOffset}`);
+        const data = await res.json();
+        setLoading(false);
+        if (data.length < 10) setHasMore(false);
+        setSales(prev => [...prev, ...data]);
+        setOffset(currentOffset + data.length);
+    }
+
+    useEffect(() => {
+        loadSales(0);
+    }, []);
 
     return (
         <div className="seller-history-page">
@@ -20,19 +33,27 @@ const SellerHistory = () => {
                 </section>
 
                 <section className="seller-history-container">
-                    {mockSales.length === 0 ? (
+                    {sales.length === 0 && !loading ? (
                         <p className="seller-history-empty">No hay ventas registradas.</p>
                     ) : (
-                        mockSales.map(sale => (
-                            <div key={sale.id} className="seller-history-item">
+                        sales.map(sale => (
+                            <div key={sale.id_compra} className="seller-history-item">
                                 <div className="seller-history-info">
-                                    <span className="seller-history-student">{sale.student}</span>
+                                    <span className="seller-history-student">{sale.nombre}</span>
                                     <span className="seller-history-cafeteria">{sale.cafeteria}</span>
-                                    <span className="seller-history-date">{sale.date}</span>
+                                    <span className="seller-history-date">{sale.fecha}</span>
                                 </div>
-                                <span className="seller-history-amount">{sale.amount}</span>
+                                <span className="seller-history-amount">${sale.total.toLocaleString('es-CO')}</span>
                             </div>
                         ))
+                    )}
+
+                    {loading && <p className="seller-history-empty">Cargando...</p>}
+
+                    {!loading && hasMore && (
+                        <button className="seller-button" onClick={() => loadSales(offset)}>
+                            Cargar más
+                        </button>
                     )}
                 </section>
 
