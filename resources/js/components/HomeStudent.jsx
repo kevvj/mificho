@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import { useEffect, useState } from 'react';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 import { QRCodeSVG } from 'qrcode.react';
 
 const HomeStudent = () => {
@@ -16,7 +16,7 @@ const HomeStudent = () => {
       return
     }
 
-    fetch(`${API_URL}/api/history`, {
+    apiFetch(`/api/history`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: user.id_usuario })

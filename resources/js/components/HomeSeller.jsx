@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import { useState, useEffect } from 'react';
 import ConfirmModal from '../components/ConfirmModal';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 
 const HomeSeller = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -17,7 +17,7 @@ const HomeSeller = () => {
     const [recentSales, setRecentSales] = useState([]);
 
     useEffect(() => {
-        fetch(`${API_URL}/api/recentSales`)
+        apiFetch(`/api/recentSales`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setRecentSales(data);
@@ -25,7 +25,7 @@ const HomeSeller = () => {
     }, []);
 
     useEffect(() => {
-        fetch(`${API_URL}/api/coffeestores`)
+        apiFetch(`/api/coffeestores`)
             .then(res => res.json())
             .then(data => setCoffeeShops(data));
     }, []);
@@ -35,7 +35,7 @@ const HomeSeller = () => {
         setFoundUser(null);
         setSuccessMessage('');
         if (!query.trim()) return setError('Ingresa un ID o correo');
-        const res = await fetch(`${API_URL}/api/findUser`, {
+        const res = await apiFetch(`/api/findUser`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query })
@@ -59,7 +59,7 @@ const HomeSeller = () => {
     async function handleConfirm() {
         setShowModal(false);
         setLoading(true);
-        const res = await fetch(`${API_URL}/api/insertPay`, {
+        const res = await apiFetch(`/api/insertPay`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -77,7 +77,7 @@ const HomeSeller = () => {
         setQuery('');
         setSelectedCoffeeShop('');
 
-        fetch(`${API_URL}/api/recentSales`)
+        apiFetch(`/api/recentSales`)
             .then(res => res.json())
             .then(data => setRecentSales(data));
     }

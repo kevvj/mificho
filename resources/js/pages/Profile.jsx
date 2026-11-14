@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 import { useState } from 'react';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 
 const Profile = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -10,7 +10,7 @@ const Profile = () => {
     const [editing, setEditing] = useState(false);
 
     const handleSave = async () => {
-        const response = await fetch(`${API_URL}/api/updateUser`, {
+        const response = await apiFetch(`/api/updateUser`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id_usuario: user.id_usuario, name, email })
@@ -27,7 +27,9 @@ const Profile = () => {
         }
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        await apiFetch(`/api/logout`, { method: 'POST' }).catch(() => {});
+        localStorage.removeItem('token');
         localStorage.removeItem('user');
         window.location.href = '/';
     };

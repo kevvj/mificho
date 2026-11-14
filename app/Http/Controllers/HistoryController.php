@@ -10,7 +10,7 @@ class HistoryController extends Controller
     public function index(Request $request)
     {
         $history = Compra::with(['detalleCompra.ficho', 'cafeteria'])
-            ->where('id_usuario', (int) $request->user_id)
+            ->where('id_usuario', $request->user()->id_usuario) // solo su propio historial
             ->orderBy('fecha', 'desc')
             ->get();
 

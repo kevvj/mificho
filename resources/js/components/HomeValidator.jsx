@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import { useState, useEffect, useRef } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 
 const HomeValidator = () => {
     const [cameraActive, setCameraActive] = useState(false);
@@ -13,11 +13,11 @@ const HomeValidator = () => {
     const scannerRef = useRef(null);
 
     useEffect(() => {
-        fetch(`${API_URL}/api/coffeestores`)
+        apiFetch(`/api/coffeestores`)
             .then(res => res.json())
             .then(data => setCoffeeShops(data));
 
-        fetch(`${API_URL}/api/recentValidations`)
+        apiFetch(`/api/recentValidations`)
             .then(res => res.json())
             .then(data => { if (Array.isArray(data)) setRecentValidations(data); });
     }, []);
@@ -26,7 +26,7 @@ const HomeValidator = () => {
         setScanError('');
         setScanResult(null);
         await stopCamera();
-        const res = await fetch(`${API_URL}/api/validateTicket`, {
+        const res = await apiFetch(`/api/validateTicket`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ticket_id: ticketId, coffee_shop_id: selectedCoffeeShop })
@@ -36,7 +36,7 @@ const HomeValidator = () => {
             setScanError(data.error);
         } else {
             setScanResult('Ficho validado exitosamente');
-            fetch(`${API_URL}/api/recentValidations`)
+            apiFetch(`/api/recentValidations`)
                 .then(r => r.json())
                 .then(d => { if (Array.isArray(d)) setRecentValidations(d); });
         }

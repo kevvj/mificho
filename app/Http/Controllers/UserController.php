@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
 
 class UserController extends Controller
@@ -12,7 +13,7 @@ class UserController extends Controller
         try {
             Usuario::create([
                 'correo' => $request->email,
-                'contrasena' => $request->password,
+                'contrasena' => Hash::make($request->password),
                 'nombre' => $request->name,
                 'tipo_usuario' => $request->type,
             ]);
@@ -45,7 +46,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $user = Usuario::where('id_usuario', $request->id_usuario)->first();
+        $user = $request->user(); // solo puede editar su propia cuenta
         $user->nombre = $request->name;
         $user->correo = $request->email;
         $user->save();

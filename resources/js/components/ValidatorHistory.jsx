@@ -1,6 +1,6 @@
 import Header from './Header';
 import { useState, useEffect } from 'react';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 
 const ValidatorHistory = () => {
     const [validations, setValidations] = useState([]);
@@ -10,7 +10,7 @@ const ValidatorHistory = () => {
 
     async function loadValidations(currentOffset) {
         setLoading(true);
-        const res = await fetch(`${API_URL}/api/allValidations?offset=${currentOffset}`);
+        const res = await apiFetch(`/api/allValidations?offset=${currentOffset}`);
         const data = await res.json();
         setLoading(false);
         if (!Array.isArray(data)) return;

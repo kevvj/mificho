@@ -6,7 +6,7 @@ import CreditCard from '../components/CreditCard';
 import PSE from '../components/PSE';
 import PurchaseSuccess from '../components/PurchaseSuccess';
 import ErrorAlert from '../components/Error';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 const BuyTicket = () => {
   const [openNequi, setOpenNequi] = useState(false);
   const [openCredicCard, setOpenCreditCard] = useState(false);
@@ -30,7 +30,7 @@ const BuyTicket = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-    fetch(`${API_URL}/api/history`, {
+    apiFetch(`/api/history`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: user.id_usuario })
@@ -48,7 +48,7 @@ const BuyTicket = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/coffeestores`)
+    apiFetch(`/api/coffeestores`)
       .then(res => res.json())
       .then(data => {
         setCoffeeShops(data);

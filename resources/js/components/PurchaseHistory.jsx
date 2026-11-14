@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import { useEffect, useState } from 'react';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 
 
 const PurchaseHistory = () => {
@@ -11,7 +11,7 @@ const PurchaseHistory = () => {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
 
-        fetch(`${API_URL}/api/history`, {
+        apiFetch(`/api/history`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ user_id: user.id_usuario })

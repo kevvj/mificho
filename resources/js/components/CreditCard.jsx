@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { API_URL } from '../config';
+import { API_URL, apiFetch } from '../config';
 
 
 const CreditCard = ({ onSuccess, open, setOpen, amount, error, setError, setShowError, coffeeShopId, setAlreadyBought }) => {
@@ -33,7 +33,7 @@ const CreditCard = ({ onSuccess, open, setOpen, amount, error, setError, setShow
         const user = JSON.parse(localStorage.getItem('user'));
         const user_id = user.id_usuario;
 
-        const response = await fetch(`${URL}/api/insertPay`, {
+        const response = await apiFetch(`/api/insertPay`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount, date: today, user_id, coffeeShopId })

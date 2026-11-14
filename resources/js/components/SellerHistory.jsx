@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 import { useState, useEffect } from 'react';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 
 const SellerHistory = () => {
     const [sales, setSales] = useState([]);
@@ -10,7 +10,7 @@ const SellerHistory = () => {
 
     async function loadSales(currentOffset) {
         setLoading(true);
-        const res = await fetch(`${API_URL}/api/allSales?offset=${currentOffset}`);
+        const res = await apiFetch(`/api/allSales?offset=${currentOffset}`);
         const data = await res.json();
         setLoading(false);
         if (!res.ok || !Array.isArray(data)) return;

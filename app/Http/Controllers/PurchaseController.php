@@ -10,7 +10,12 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
         try {
-            $yaCompro = Compra::where('id_usuario', $request->user_id)
+            // el estudiante solo compra para sí mismo; el vendedor puede venderle a otro
+            $idUsuario = $request->user()->tipo_usuario === 'vendedor'
+                ? $request->user_id
+                : $request->user()->id_usuario;
+
+            $yaCompro = Compra::where('id_usuario', $idUsuario)
                 ->whereDate('fecha', now()->toDateString())
                 ->exists();
 
@@ -21,7 +26,7 @@ class PurchaseController extends Controller
             Compra::create([
                 'total' => $request->amount,
                 'fecha' => $request->date,
-                'id_usuario' => $request->user_id,
+                'id_usuario' => $idUsuario,
                 'id_cafeteria' => $request->coffeeShopId,
             ]);
 

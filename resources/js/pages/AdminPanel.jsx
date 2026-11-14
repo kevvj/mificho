@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from '../config';
+import { apiFetch } from '../config';
 
 
 const INITIAL_SHOW = 6;
@@ -32,25 +32,25 @@ const TablePanel = () => {
 
     const [coffeeShops, setCoffeeShops] = useState([]);
     useEffect(() => {
-        fetch(`${API_URL}/api/users`)
+        apiFetch(`/api/users`)
             .then(res => res.json())
             .then(data => setUsers(data));
     }, []);
 
     useEffect(() => {
-        fetch(`${API_URL}/api/fichos`)
+        apiFetch(`/api/fichos`)
             .then(res => res.json())
             .then(data => setTickets(data));
     }, []);
 
     useEffect(() => {
-        fetch(`${API_URL}/api/allPurchases`)
+        apiFetch(`/api/allPurchases`)
             .then(res => res.json())
             .then(data => setPurchases(data));
     }, []);
 
     useEffect(() => {
-        fetch(`${API_URL}/api/coffeestores`)
+        apiFetch(`/api/coffeestores`)
             .then(res => res.json())
             .then(data => setCoffeeShops(data));
     }, []);
@@ -64,7 +64,7 @@ const TablePanel = () => {
     const handleStatusChange = (id, newStatus) => {
         setTickets(prev => prev.map(t => t.id_ficho === id ? { ...t, estado: newStatus } : t));
 
-        fetch(`${API_URL}/api/updateTicket`, {
+        apiFetch(`/api/updateTicket`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, status: newStatus })
@@ -75,7 +75,7 @@ const TablePanel = () => {
 
     async function handleAddCoffeeShop() {
         if (!newCoffeeShop.name || !newCoffeeShop.location) return;
-        const res = await fetch(`${API_URL}/api/insertCoff`, {
+        const res = await apiFetch(`/api/insertCoff`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: newCoffeeShop.name, location: newCoffeeShop.location })
@@ -83,16 +83,16 @@ const TablePanel = () => {
         if (!res.ok) return;
         setNewCoffeeShop({ name: '', location: '' });
         setShowAddCoffeeShop(false);
-        fetch(`${API_URL}/api/coffeestores`)
+        apiFetch(`/api/coffeestores`)
             .then(res => res.json())
             .then(data => setCoffeeShops(data));
     }
 
     async function handleInvalidateOld() {
-        const res = await fetch(`${API_URL}/api/invalidateOld`, { method: 'POST' });
+        const res = await apiFetch(`/api/invalidateOld`, { method: 'POST' });
         const data = await res.json();
         if (!res.ok) return;
-        fetch(`${API_URL}/api/fichos`)
+        apiFetch(`/api/fichos`)
             .then(res => res.json())
             .then(data => setTickets(data));
     }
